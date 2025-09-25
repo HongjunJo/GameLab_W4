@@ -1633,7 +1633,7 @@ GameObject:
   - component: {fileID: 8218352064786667859}
   - component: {fileID: 2236755603506407837}
   m_Layer: 10
-  m_Name: Iron
+  m_Name: DiamondOre
   m_TagString: Ore
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
