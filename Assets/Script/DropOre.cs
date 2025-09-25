@@ -1,9 +1,11 @@
 using UnityEngine;
 public enum OreList
 {
-    Copper
+    Stone, Copper, Iron, Gold, Diamond
 }
 public class DropOre : MonoBehaviour
 {
     public OreList currentOre;
+
 }
+
