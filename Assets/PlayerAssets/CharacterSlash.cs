@@ -7,18 +7,26 @@ public class CharacterSlash : MonoBehaviour
     [SerializeField] Transform target;
     [SerializeField] GameObject Sword;
     [SerializeField] GameObject Slash;
+    private Collider2D[] hitList = new Collider2D[50];
+    
+    //현재 검 길이
+    private float currentSwordLength = 1f;
+    //평타 쿨
+    [SerializeField] private float slashCoolTime = 0.15f;
+    private float slashTempTime = 0;
+    [Header("Air")]
+    //기본 소모 공기량
+    [SerializeField] private float RequireAir;
+    [SerializeField] private float reduceAir;
+    [SerializeField] private float slashReduceAir;
+    [SerializeField] private bool SlashUseAirMode = false;
+    [Header("Sword Length")]
     //최대 검 길이
     [SerializeField] private float maxSwordLength;
     [SerializeField] private float sizeOffset;
-    //현재 검 길이
-    private float currentSwordLength = 1f;
-    //기본 소모 공기량
-    [SerializeField] private float airOffset;
-    private Collider2D[] hitList = new Collider2D[10];
-    [SerializeField] private float slashCoolTime = 0.15f;
-    [SerializeField] private float slashTempTime = 0;
+    
     //베는 중
-    [SerializeField] private bool isSlash = false;
+    private bool isSlash = false;
 
     // Update is called once per frame
     void Update()
@@ -30,7 +38,6 @@ public class CharacterSlash : MonoBehaviour
                 GetComponent<Animator>().Play("Slash");
                 SlashCheck();
             }
-
         }
         if (Input.GetKey(KeyCode.UpArrow))
         {
@@ -50,7 +57,6 @@ public class CharacterSlash : MonoBehaviour
         UseAir();
         chkCoolTime();
     }
-
     void chkCoolTime()
     {
         if (slashTempTime >= slashCoolTime)
@@ -62,37 +68,50 @@ public class CharacterSlash : MonoBehaviour
             slashTempTime += Time.deltaTime;
         }
     }
-
     void UseAir()
     {
         if (currentSwordLength <= 0)
             return;
         //검 길이 만큼 소모
-        dangerGaugeSystem.DecreaseDanger(airOffset*currentSwordLength*Time.deltaTime);
-    }
+        dangerGaugeSystem.DecreaseDanger(reduceAir * currentSwordLength * Time.deltaTime);
 
+        
+    }
     void ReSize()
     {
-        Sword.transform.localScale = new Vector3(1, 1 * currentSwordLength, 1);
-        Slash.transform.localScale = new Vector3(1*currentSwordLength,1,1);
+        if (dangerGaugeSystem.GetDangerRatio() <= RequireAir)
+        {
+            float airRatio = Mathf.InverseLerp(0f, RequireAir, dangerGaugeSystem.GetDangerRatio());
+            Sword.transform.localScale = new Vector3(1, 1 * currentSwordLength * airRatio, 1);
+            Slash.transform.localScale = new Vector3(1*currentSwordLength* airRatio,1,1);
+        }
+        else
+        {
+            Sword.transform.localScale = new Vector3(1, 1 * currentSwordLength, 1);
+            Slash.transform.localScale = new Vector3(1*currentSwordLength,1,1);
+        }
+        
     }
     void SlashCheck()
     {
         slashTempTime = 0;
         isSlash = true;
         hitList = Physics2D.OverlapCircleAll(transform.position+ new Vector3(0.5f,0f,0f), 0.75f * currentSwordLength, layerMask);
+        //베기 공기 소모 활성화시
+        if (SlashUseAirMode)
+            dangerGaugeSystem.DecreaseDanger(slashReduceAir);
         foreach (Collider2D hit in hitList)
         {
             if (hit.CompareTag("Enemy"))
             {
                 hit.GetComponent<Enemy>().SliceStart();
-                
+
             }
             if (hit.CompareTag("Ore"))
             {
                 hit.GetComponent<Ore>().SliceStart();
             }
-        
+
         }
         
     }
