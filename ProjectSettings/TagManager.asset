@@ -6,6 +6,8 @@ TagManager:
   tags:
   - SafeZone
   - Enemy
+  - Ore
+  - DropOre
   layers:
   - Default
   - TransparentFX
@@ -17,8 +19,8 @@ TagManager:
   - Interactable
   - Enemy
   - EnemyBody
-  - 
-  - 
+  - Ore
+  - OreBody
   - 
   - 
   - 
