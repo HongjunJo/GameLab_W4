@@ -52,9 +52,13 @@ public class CharacterSlash : MonoBehaviour
             {
                 hit.GetComponent<Enemy>().SliceStart();
             }
+            if (hit.CompareTag("Ore"))
+            {
+                Debug.Log("Test");
+                hit.GetComponent<Ore>().SliceStart();
+            }
         }
     }
-
     void OnDrawGizmos() // 범위 그리기
     {
         Gizmos.color = Color.red;
