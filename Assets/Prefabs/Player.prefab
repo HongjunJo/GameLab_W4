@@ -5477,7 +5477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cd47e9c198cf494ea61214f65e571e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundLength: 10
+  groundLength: 0.7
   colliderOffset: {x: 0.3, y: 0, z: 0}
   groundLayer:
     serializedVersion: 2
