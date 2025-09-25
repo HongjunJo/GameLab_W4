@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - SafeZone
+  - Enemy
+  - Ore
+  - DropOre
   layers:
   - Default
   - TransparentFX
@@ -14,10 +17,10 @@ TagManager:
   - UI
   - Ground
   - Interactable
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - EnemyBody
+  - Ore
+  - OreBody
   - 
   - 
   - 
