@@ -19,13 +19,7 @@ public class EnemyBase : MonoBehaviour
         health = GetComponent<Health>();
         if (health != null)
         {
-            // maxHP 값 동기화
-            var hpField = typeof(Health).GetField("maxHP", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            if (hpField != null)
-            {
-                hpField.SetValue(health, maxHP);
-                health.FullHeal();
-            }
+            health.Initialize(maxHP); // 리플렉션 대신 공개 메서드 사용
             health.Died += OnDied;
         }
     }
@@ -50,8 +44,7 @@ public class EnemyBase : MonoBehaviour
 
     private void TryDamagePlayer(GameObject obj)
     {
-        // "Player" 태그 또는 Health 컴포넌트로 판별
-        if (obj.CompareTag("Player") || obj.GetComponent<Health>() != null)
+        if (obj.CompareTag("Player"))
         {
             var playerHealth = obj.GetComponent<Health>();
             if (playerHealth != null)

@@ -29,6 +29,7 @@ public class DangerGaugeSystem : MonoBehaviour
     private CharacterJump characterJump;
     [SerializeField] private Rigidbody2D playerRb; // 인스펙터에서 할당할 수 있도록 변경
     private PlayerStatus playerStatus;
+    private Health playerHealth; // Health 컴포넌트 참조 추가
     private SpriteRenderer spriteRenderer;
     
     [Header("State")]
@@ -52,6 +53,7 @@ public class DangerGaugeSystem : MonoBehaviour
         characterJump = GetComponent<CharacterJump>();
         // playerRb = GetComponentInChildren<Rigidbody2D>(); // 더 이상 자식에서 찾지 않음
         playerStatus = GetComponent<PlayerStatus>();
+        playerHealth = GetComponent<Health>(); // Health 컴포넌트 가져오기
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (playerRb == null)
         {
@@ -408,6 +410,12 @@ public class DangerGaugeSystem : MonoBehaviour
         // 4. 플레이어 상태 초기화 (가장 중요)
         isDead = false;
         currentOxygen = maxOxygen; // 산소를 100으로 초기화
+
+        // Health 컴포넌트가 있다면 HP도 최대로 회복시킵니다.
+        if (playerHealth != null)
+        {
+            playerHealth.FullHeal();
+        }
 
         UnfreezePlayer();
         EnablePlayerControl();
