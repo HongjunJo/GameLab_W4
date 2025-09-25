@@ -2,67 +2,104 @@ using UnityEngine;
 
 public class CharacterSlash : MonoBehaviour
 {
+    [SerializeField] DangerGaugeSystem dangerGaugeSystem;
     [SerializeField] LayerMask layerMask;
     [SerializeField] Transform target;
     [SerializeField] GameObject Sword;
     [SerializeField] GameObject Slash;
-    private float size = 1f;
-     // NonAlloc용 고정 배열 (최대 10명까지 타격 가능)
+    //최대 검 길이
+    [SerializeField] private float maxSwordLength;
+    [SerializeField] private float sizeOffset;
+    //현재 검 길이
+    private float currentSwordLength = 1f;
+    //기본 소모 공기량
+    [SerializeField] private float airOffset;
     private Collider2D[] hitList = new Collider2D[10];
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
+    [SerializeField] private float slashCoolTime = 0.15f;
+    [SerializeField] private float slashTempTime = 0;
+    //베는 중
+    [SerializeField] private bool isSlash = false;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            GetComponent<Animator>().Play("Slash");
-            SlashCheck();
+            if (!isSlash)
+            {
+                GetComponent<Animator>().Play("Slash");
+                SlashCheck();
+            }
+
         }
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKey(KeyCode.UpArrow))
         {
-            size += 1;
+            if (currentSwordLength >= maxSwordLength)
+                return;
+            currentSwordLength += sizeOffset;
         }
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKey(KeyCode.DownArrow))
         {
-            if (size - 1 <= 0)
+            if (currentSwordLength - sizeOffset <= 0)
             {
                 return;
             }
-            size -= 1;
+            currentSwordLength -= sizeOffset;
         }
         ReSize();
+        UseAir();
+        chkCoolTime();
+    }
+
+    void chkCoolTime()
+    {
+        if (slashTempTime >= slashCoolTime)
+        {
+            isSlash = false;
+        }
+        else
+        {
+            slashTempTime += Time.deltaTime;
+        }
+    }
+
+    void UseAir()
+    {
+        if (currentSwordLength <= 0)
+            return;
+        //검 길이 만큼 소모
+        dangerGaugeSystem.DecreaseDanger(airOffset*currentSwordLength*Time.deltaTime);
     }
 
     void ReSize()
     {
-        Sword.transform.localScale = new Vector3(1, 1 * size, 1);
-        Slash.transform.localScale = new Vector3(1*size,1,1);
+        Sword.transform.localScale = new Vector3(1, 1 * currentSwordLength, 1);
+        Slash.transform.localScale = new Vector3(1*currentSwordLength,1,1);
     }
     void SlashCheck()
     {
-        hitList = Physics2D.OverlapCircleAll(transform.position+ new Vector3(0.5f,0f,0f), 0.75f * size, layerMask);
+        slashTempTime = 0;
+        isSlash = true;
+        hitList = Physics2D.OverlapCircleAll(transform.position+ new Vector3(0.5f,0f,0f), 0.75f * currentSwordLength, layerMask);
         foreach (Collider2D hit in hitList)
         {
             if (hit.CompareTag("Enemy"))
             {
                 hit.GetComponent<Enemy>().SliceStart();
+                
             }
             if (hit.CompareTag("Ore"))
             {
-                Debug.Log("Test");
                 hit.GetComponent<Ore>().SliceStart();
             }
+        
         }
+        
     }
     void OnDrawGizmos() // 범위 그리기
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position + new Vector3(0.5f,0f,0f),0.75f * size);
+        Gizmos.DrawWireSphere(transform.position + new Vector3(0.5f,0f,0f),0.75f * currentSwordLength);
     }
 
 }
