@@ -26132,9 +26132,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8080641589137805883, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
+    - target: {fileID: 3724530019232636406, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
+      propertyPath: jumpHeight
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3724530019232636406, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
+      propertyPath: speedLimit
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3724530019232636406, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
+      propertyPath: airJumpHeight
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3724530019232636406, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
+      propertyPath: downwardMovementMultiplier
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5127241574519584372, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
+      propertyPath: interactionKey
+      value: 102
+      objectReference: {fileID: 0}
+    - target: {fileID: 5127241574519584372, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
+      propertyPath: interactionRange
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 9048801839704934725, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
       propertyPath: m_Name
@@ -26143,7 +26163,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9048801839704934725, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5200006790903490104}
+    - targetCorrespondingSourceObject: {fileID: 9048801839704934725, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5200006790903490105}
   m_SourcePrefab: {fileID: 100100000, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
 --- !u!1001 &4610434620785489429
 PrefabInstance:
@@ -26219,6 +26245,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 798795091028658465, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
   m_PrefabInstance: {fileID: 4607984733172572854}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &5200006790903490095 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 5212341716560732870, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
+  m_PrefabInstance: {fileID: 4607984733172572854}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5200006790903490104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514947557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c123e88f62db18147bc7fe9790ef0bc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxOxygen: 100
+  currentOxygen: 100
+  oxygenDecreaseRate: 3
+  oxygenIncreaseRate: 20
+  deathEffect: {fileID: 0}
+  deathParticleEffect: {fileID: 8935792230005008795}
+  deathEffectDuration: 0.5
+  respawnDelay: 0.5
+  useFlagSystem: 1
+  deathFreezeTime: 0.5
+  playerRb: {fileID: 5200006790903490095}
+  isDead: 0
+  isRespawning: 0
+  isInSafeZone: 0
+--- !u!114 &5200006790903490105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514947557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8748a46ee59271e459834f1cce1a13ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugTempResources: []
 --- !u!1001 &5529616208180877011
 PrefabInstance:
   m_ObjectHideFlags: 0

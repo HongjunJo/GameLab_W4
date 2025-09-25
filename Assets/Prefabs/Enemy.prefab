@@ -13,6 +13,9 @@ GameObject:
   - component: {fileID: 5305350328677436574}
   - component: {fileID: 2706694550643037886}
   - component: {fileID: 3196049487880120826}
+  - component: {fileID: 5601690760120941181}
+  - component: {fileID: 6809974858669182393}
+  - component: {fileID: 4100808518135505324}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
@@ -28,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1836797291929572112}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -15.705, y: -2.5399995, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -168,6 +171,56 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5601690760120941181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836797291929572112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e216f824d4382b47addb210e795bc83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 0
+  moveDistance: 5
+  speed: 2
+  waitTime: 1
+--- !u!114 &6809974858669182393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836797291929572112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eeb16dc61b886b4994ac4ae29c428d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 100
+  currentHP: 100
+  isInvincible: 0
+  autoHealDelay: 3
+  autoHealAmount: 5
+  autoHealInterval: 0.5
+  enableAutoHeal: 0
+--- !u!114 &4100808518135505324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836797291929572112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10ec76d808965eb448dc559d8e59aa1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 2
+  attackPower: 10
+  maxHP: 30
 --- !u!1 &4722465491446829660
 GameObject:
   m_ObjectHideFlags: 0
