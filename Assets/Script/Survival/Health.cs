@@ -5,6 +5,13 @@ using UnityEngine;
 /// </summary>
 public class Health : MonoBehaviour
 {
+    [Header("Damage Effect Settings")]
+    [SerializeField] private float invincibleTime = 1f;
+    [SerializeField] private Color blinkColor = Color.red;
+    [SerializeField] private int blinkCount = 6;
+    [SerializeField] private float knockbackForce = 10f;
+    private SpriteRenderer spriteRenderer;
+    private Coroutine blinkCoroutine;
     [Header("HP Settings")]
     [SerializeField] private float maxHP = 100f;
     [SerializeField] private float currentHP = 100f;
@@ -31,18 +38,9 @@ public class Health : MonoBehaviour
 
     private void Awake()
     {
+    spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         // 플레이어의 DangerGaugeSystem 컴포넌트를 찾아 저장합니다.
         dangerGaugeSystem = GetComponent<DangerGaugeSystem>();
-    }
-
-    private void Start()
-    {
-        // currentHP가 maxHP보다 높은 상태로 시작하는 것을 방지
-        if (currentHP > maxHP || currentHP <= 0)
-        {
-            currentHP = maxHP;
-        }
-        HPChanged?.Invoke(currentHP, maxHP);
     }
 
     /// <summary>
@@ -60,33 +58,86 @@ public class Health : MonoBehaviour
     /// </summary>
     public void TakeDamage(float amount)
     {
+        TakeDamage(amount, null);
+    }
+
+    public void TakeDamage(float amount, GameObject attacker)
+    {
         if (IsDead || isInvincible) return;
         currentHP -= amount;
         HPChanged?.Invoke(currentHP, maxHP);
         lastDamageTime = Time.time;
+
+        // 넉백 적용 (공격자 기준, 2D 전체 방향)
+        if (knockbackForce > 0f && attacker != null)
+        {
+            Vector2 dir = ((Vector2)transform.position - (Vector2)attacker.transform.position).normalized;
+            Rigidbody2D rb = GetComponentInChildren<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector2.zero;
+                rb.AddForce(dir * knockbackForce, ForceMode2D.Impulse);
+            }
+        }
+
+        // 무적 및 깜빡임 효과
+        if (blinkCoroutine != null)
+            StopCoroutine(blinkCoroutine);
+        blinkCoroutine = StartCoroutine(BlinkAndInvincibleCoroutine());
+
         if (currentHP <= 0f)
         {
             currentHP = 0f;
-            // Died 이벤트를 호출하는 대신, DangerGaugeSystem의 사망 처리 메서드를 직접 호출합니다.
             if (dangerGaugeSystem != null)
             {
-                dangerGaugeSystem.KillPlayer("HP 0"); // "HP 0"은 사망 원인 로그
+                dangerGaugeSystem.KillPlayer("HP 0");
             }
-
-            // 기존 이벤트 구독자를 위해 이벤트도 호출해줍니다. (선택사항)
             Died?.Invoke(); 
         }
 
-        // 자동 회복 로직 개선
         if (enableAutoHeal && currentHP > 0f)
         {
-            // 기존 자동 회복 코루틴이 있다면 중지
             if (autoHealCoroutine != null)
             {
                 StopCoroutine(autoHealCoroutine);
             }
-            // 새로운 코루틴 시작
             autoHealCoroutine = StartCoroutine(AutoHealCoroutine());
+        }
+    }
+
+    private System.Collections.IEnumerator BlinkAndInvincibleCoroutine()
+    {
+        isInvincible = true;
+        if (spriteRenderer != null)
+        {
+            Color originalColor = spriteRenderer.color;
+            for (int i = 0; i < blinkCount; i++)
+            {
+                spriteRenderer.color = blinkColor;
+                yield return new WaitForSeconds(invincibleTime / (blinkCount * 2f));
+                spriteRenderer.color = originalColor;
+                yield return new WaitForSeconds(invincibleTime / (blinkCount * 2f));
+            }
+        }
+        else
+        {
+            yield return new WaitForSeconds(invincibleTime);
+        }
+        isInvincible = false;
+
+        // 무적 끝난 직후, Enemy 레이어와 겹쳐 있으면 적에게서 다시 데미지
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 0.5f, LayerMask.GetMask("Enemy"));
+        foreach (var hit in hits)
+        {
+            if (hit.gameObject != this.gameObject)
+            {
+                var enemy = hit.GetComponent<EnemyBase>();
+                if (enemy != null)
+                {
+                    TakeDamage(enemy.AttackPower, hit.gameObject);
+                    break; // 한 번만
+                }
+            }
         }
     }
 
@@ -105,6 +156,7 @@ public class Health : MonoBehaviour
         // 코루틴이 정상적으로 끝나면 참조를 null로 설정
         autoHealCoroutine = null;
     }
+
 
     /// <summary>
     /// HP를 최대치로 설정합니다.
