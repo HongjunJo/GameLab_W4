@@ -580,7 +580,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2787660299445787519, guid: f47b3a99c4837cb44b7fa7d4a8b32e31, type: 3}
+  m_Sprite: {fileID: -6099149005899855317, guid: 749ef54b08eb652409d8ba4d23e6234d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -627,9 +627,9 @@ BoxCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0.04, y: 0, z: 0.04, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.9, y: 0.68}
+    oldSize: {x: 1, y: 0.74}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -676,7 +676,6 @@ GameObject:
   - component: {fileID: 1888952084878621069}
   - component: {fileID: 2906978922175870140}
   - component: {fileID: 7340256722677764074}
-  - component: {fileID: 5441220593635836831}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player
@@ -841,6 +840,7 @@ MonoBehaviour:
   gravMultiplier: 1
   canJumpAgain: 0
   onGround: 0
+  canDoubleJump: 0
 --- !u!114 &1213500214583510323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -945,6 +945,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugTempResources: []
+  deathBoxPrefab: {fileID: 0}
 --- !u!114 &6298993242794654602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1001,6 +1002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugTempResources: []
+  deathBoxPrefab: {fileID: 0}
 --- !u!95 &5700613257339939564
 Animator:
   serializedVersion: 7
@@ -1042,7 +1044,7 @@ MonoBehaviour:
   Sword: {fileID: 7373156739853823830}
   Slash: {fileID: 676655415998168023}
   currentSwordLength: 1
-  slashCoolTime: 0.5
+  slashCoolTime: 0.2
   RequireAir: 0.1
   reduceAir: 0.5
   slashReduceAir: 5
@@ -1085,61 +1087,6 @@ MonoBehaviour:
   autoHealAmount: 5
   autoHealInterval: 0.5
   enableAutoHeal: 1
---- !u!212 &5441220593635836831
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7085316938866935584}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -6099149005899855317, guid: 749ef54b08eb652409d8ba4d23e6234d, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 0.74}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!1 &7373156739853823830
 GameObject:
   m_ObjectHideFlags: 0
