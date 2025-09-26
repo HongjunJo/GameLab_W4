@@ -78,7 +78,11 @@ public class Slice : MonoBehaviour
         yield return new WaitForSeconds(bodyRemainTime);
         _body.SetActive(false);
         if (GetComponent<EnemyBase>() != null && currentHp == 1)
+        {
             TargetBodies[currentHp - 1].SetActive(false);
+        DelTarget();
+        }
+            
     }
     private IEnumerator RespawnCoroutine()
     {
