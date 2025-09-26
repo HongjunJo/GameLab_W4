@@ -10,6 +10,29 @@ using System.Collections.Generic;
  [RequireComponent(typeof(Health))]
  public class EnemyBase : MonoBehaviour
  {
+    // unreachablePlayerTimeLimit은 chaseMemoryTime과 항상 동일하게 사용
+    private float unreachablePlayerTimer = 0f;
+    [Header("Cliff Check")]
+    [SerializeField] private bool preventCliffFall = true;
+    [SerializeField] private float groundCheckDistance = 1.0f;
+    [SerializeField] private LayerMask groundLayer;
+
+    // 이동 전 발밑에 땅이 있는지 체크
+    private bool IsGroundAhead(Vector3 direction)
+    {
+        if (!preventCliffFall) return true;
+        CapsuleCollider2D col = GetComponent<CapsuleCollider2D>();
+        if (col == null)
+        {
+            return true;
+        }
+    Vector2 origin = new Vector2(col.bounds.center.x, col.bounds.min.y) + (Vector2)direction.normalized * 0.3f;
+        RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, groundCheckDistance, groundLayer);
+        #if UNITY_EDITOR
+        Debug.DrawLine(origin, origin + Vector2.down * groundCheckDistance, hit ? Color.green : Color.red, 0.1f);
+        #endif
+        return hit;
+    }
     [Header("Patrol Settings")]
     [SerializeField] private bool enablePatrol = false;
     [SerializeField] private List<Vector3> patrolPoints = new List<Vector3>();
@@ -74,7 +97,11 @@ using System.Collections.Generic;
         if (patrolPoints.Count == 0) return;
         Vector3 targetPoint = patrolPoints[currentPatrolIndex];
         float step = moveSpeed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, targetPoint, step);
+        Vector3 moveDir = (targetPoint - transform.position).normalized;
+        if (IsGroundAhead(moveDir))
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPoint, step);
+        }
 
         if (Vector3.Distance(transform.position, targetPoint) < 0.05f)
         {
@@ -107,10 +134,25 @@ using System.Collections.Generic;
     private void FollowPlayer()
     {
     // X축만 또는 X,Y축 모두 따라가기
-    float targetY = followY ? playerTarget.position.y : transform.position.y;
-    Vector3 targetPos = new Vector3(playerTarget.position.x, targetY, transform.position.z);
-    float step = moveSpeed * Time.deltaTime;
-    transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+        float targetY = followY ? playerTarget.position.y : transform.position.y;
+        Vector3 targetPos = new Vector3(playerTarget.position.x, targetY, transform.position.z);
+        float step = moveSpeed * Time.deltaTime;
+        Vector3 moveDir = (targetPos - transform.position).normalized;
+        if (IsGroundAhead(moveDir))
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+            unreachablePlayerTimer = 0f;
+        }
+        else
+        {
+            unreachablePlayerTimer += Time.deltaTime;
+            if (unreachablePlayerTimer >= chaseMemoryTime)
+            {
+                // 추적 포기, 패트롤로 복귀
+                isPlayerDetected = false;
+                unreachablePlayerTimer = 0f;
+            }
+        }
     }
 
     private void OnDrawGizmosSelected()
@@ -118,6 +160,23 @@ using System.Collections.Generic;
         // 플레이어 탐지 범위
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
+
+        // 절벽 방지용 레이캐스트 시각화 (실제 레이캐스트와 동일하게 콜라이더 기준)
+        if (preventCliffFall)
+        {
+            CapsuleCollider2D col = GetComponent<CapsuleCollider2D>();
+            if (col != null)
+            {
+                Vector2 baseOrigin = new Vector2(col.bounds.center.x, col.bounds.min.y);
+                Vector3[] dirs = { Vector3.right, Vector3.left };
+                foreach (var dir in dirs)
+                {
+                    Vector2 origin = baseOrigin + (Vector2)dir.normalized * 0.3f;
+                    Gizmos.color = Color.cyan;
+                    Gizmos.DrawLine(origin, origin + Vector2.down * groundCheckDistance);
+                }
+            }
+        }
 
         // 패트롤 포인트 및 경로
         if (patrolPoints != null && patrolPoints.Count > 0)

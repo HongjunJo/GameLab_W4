@@ -6,6 +6,10 @@ using System.Collections;
 /// </summary>
 public class DangerGaugeSystem : MonoBehaviour
 {
+    [Header("Oxygen Deplete Damage Settings")]
+    [SerializeField] private float oxygenDepleteDamage = 10f; // 산소 0일 때 HP 감소량
+    [SerializeField] private float oxygenDepleteInterval = 1f; // 산소 0일 때 HP 감소 간격(초)
+    private float oxygenDepleteTimer = 0f;
     [Header("Oxygen Settings")]
     [SerializeField] private float maxOxygen = 100f;
     [SerializeField] private float currentOxygen = 100f; // 100에서 시작
@@ -73,7 +77,6 @@ public class DangerGaugeSystem : MonoBehaviour
         if (isDead || isRespawning) return;
 
         // 매 프레임 안전지대 상태를 직접 확인합니다.
-        // 이 방식이 OnTriggerStay와 동일한 안정성을 제공합니다.
         bool currentlyInSafeZone = IsPlayerInSafeZone();
         if (isInSafeZone != currentlyInSafeZone)
         {
@@ -82,15 +85,30 @@ public class DangerGaugeSystem : MonoBehaviour
 
         bool dangerChanged = false;
 
-        if (!isInSafeZone) // 위험 지대
+        if (!isInSafeZone)
         {
             // 산소 소모
             dangerChanged = DecreaseDanger(oxygenDecreaseRate * Time.deltaTime);
         }
-        else if (isInSafeZone && currentOxygen < maxOxygen) // 안전 지대이고, 산소가 가득 차지 않았을 때
+        else if (isInSafeZone && currentOxygen < maxOxygen)
         {
             // 산소 회복
             dangerChanged = IncreaseDanger(oxygenIncreaseRate * Time.deltaTime);
+        }
+
+        // 산소가 0일 때 HP 주기적 감소
+        if (currentOxygen <= 0f && playerHealth != null && playerHealth.CurrentHP > 0)
+        {
+            oxygenDepleteTimer += Time.deltaTime;
+            if (oxygenDepleteTimer >= oxygenDepleteInterval)
+            {
+                playerHealth.TakeDamage(oxygenDepleteDamage);
+                oxygenDepleteTimer = 0f;
+            }
+        }
+        else
+        {
+            oxygenDepleteTimer = 0f;
         }
 
         if (dangerChanged)
@@ -191,27 +209,30 @@ public class DangerGaugeSystem : MonoBehaviour
 
         Debug.Log($"Player died from oxygen depletion! Oxygen fixed at 0");
 
-        // 플레이어 사망 이벤트 발생
+        // Die()에서는 HP를 깎지 않고, Update에서 주기적으로 HP를 감소시킴
+        if (playerHealth != null && playerHealth.CurrentHP > 0)
+        {
+            isDead = false;
+            return;
+        }
+
+        // HP가 0이 된 경우에만 리스폰 처리
         GameEvents.PlayerDied();
 
-        // 사망 직전의 점프 입력을 포함한 모든 점프 상태를 즉시 리셋합니다.
         if (characterJump != null)
         {
             characterJump.ResetJumpState();
             Debug.Log("사망 처리 시작: CharacterJump 상태를 리셋하여 원치 않는 점프를 방지합니다.");
         }
 
-        // 플레이어 제어 비활성화 및 프리징
         DisablePlayerControl();
         FreezePlayer();
 
-        // MovementLimiter를 통해 추가적으로 움직임 제한
         if (MovementLimiter.Instance != null)
         {
             MovementLimiter.Instance.SetCanMove(false);
         }
 
-        // 죽음 효과 시작 (메테리얼 변경, 프리징, 이펙트)
         StartCoroutine(DeathSequence());
     }
 

@@ -136,10 +136,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ec76d808965eb448dc559d8e59aa1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enablePatrol: 0
+  preventCliffFall: 1
+  groundCheckDistance: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  enablePatrol: 1
   patrolPoints: []
-  patrolWaitTime: 0.5
-  chaseMemoryTime: 2
+  patrolWaitTime: 0.2
+  chaseMemoryTime: 1
   followY: 0
   detectionRadius: 5
   playerLayer:

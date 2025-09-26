@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using TMPro;
+﻿﻿using UnityEngine;
+using TMPro; // TextMeshProUGUI를 사용하기 위해 필요합니다.
 using System.Collections.Generic;
 using System.Text;
 
