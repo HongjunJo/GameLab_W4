@@ -147,6 +147,20 @@ public class ResourceManager : MonoBehaviour
     {
         return new Dictionary<MineralData, int>(resources);
     }
+
+    /// <summary>
+    /// 저장된 모든 자원의 총 개수를 반환합니다.
+    /// </summary>
+    /// <returns>모든 자원의 총합</returns>
+    public int GetTotalResourceCount()
+    {
+        int totalCount = 0;
+        foreach (int amount in resources.Values)
+        {
+            totalCount += amount;
+        }
+        return totalCount;
+    }
     
     /// <summary>
     /// 디버그용 인스펙터 표시 업데이트
