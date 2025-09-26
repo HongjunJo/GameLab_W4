@@ -23,6 +23,9 @@ public class TemporaryInventory : MonoBehaviour
     [Header("Debug - Temporary Resources")]
     [SerializeField] private List<TempResourceDisplay> debugTempResources = new List<TempResourceDisplay>();
 
+    [Header("사망 설정")]
+    [SerializeField] private GameObject deathBoxPrefab; // 사망 시 생성될 아이템 상자 프리팹
+
     /// <summary>
     /// 임시 인벤토리에 자원을 추가합니다.
     /// </summary>
@@ -68,49 +71,29 @@ public class TemporaryInventory : MonoBehaviour
     }
 
     /// <summary>
-    /// 임시 인벤토리를 비우고, 각 자원의 출처(ResourceSource)에 리스폰을 요청합니다.
+    /// 플레이어 사망 시 임시 인벤토리의 모든 아이템을 담은 가방(Crate)을 생성합니다.
     /// </summary>
-    public void ClearAndRespawnAll()
+    public void DropAllItemsOnDeath()
     {
-        Debug.Log("플레이어 사망. 임시 인벤토리의 자원 중 50%를 잃고, 각 자원을 리스폰시킵니다.");
-
-        // 임시 인벤토리의 키 목록을 복사하여 반복 중 수정이 가능하도록 합니다.
-        var mineralsToProcess = new List<MineralData>(tempResources.Keys);
-
-        foreach (var mineral in mineralsToProcess)
+        if (tempResources.Count == 0)
         {
-            var entry = tempResources[mineral];
-            int currentAmount = entry.amount;
-            
-            // 남는 양을 50% 내림으로 계산합니다.
-            int amountToKeep = Mathf.FloorToInt(currentAmount * 0.5f);
-            int amountToLose = currentAmount - amountToKeep;
-            Debug.Log($"{mineral.name} {currentAmount}개 중 {amountToLose}개를 잃고 {amountToKeep}개가 남습니다.");
-
-
-            // 잃을 양만큼 자원 소스를 찾아 리스폰시킵니다.
-            for (int i = 0; i < amountToLose; i++)
-            {
-                if (entry.sources.Count > 0)
-                {
-                    entry.sources[0].ForceRespawn(); // 가장 먼저 추가된 소스부터 리스폰
-                    entry.sources.RemoveAt(0);
-                }
-            }
-
-            // 남은 양으로 인벤토리 업데이트
-            if (amountToKeep > 0)
-            {
-                entry.amount = amountToKeep;
-                tempResources[mineral] = entry;
-            }
-            else
-            {
-                tempResources.Remove(mineral); // 수량이 0이 되면 딕셔너리에서 완전히 제거
-            }
+            Debug.Log("임시 인벤토리가 비어있어 아무것도 떨어뜨리지 않습니다.");
+            return;
         }
 
-        // 임시 인벤토리가 비워졌음을 UI에 알립니다.
+        if (deathBoxPrefab == null)
+        {
+            Debug.LogError("Death Box 프리팹이 할당되지 않았습니다! 아이템을 떨어뜨릴 수 없습니다.");
+            return;
+        }
+
+        Debug.Log("플레이어 사망. 임시 인벤토리의 모든 아이템을 그 자리에 떨어뜨립니다.");
+        GameObject boxInstance = Instantiate(deathBoxPrefab, transform.position, Quaternion.identity);
+        DeathBox deathBox = boxInstance.GetComponent<DeathBox>();
+        deathBox?.Initialize(tempResources);
+
+        // 모든 아이템을 DeathBox로 옮겼으므로 임시 인벤토리를 비웁니다.
+        tempResources.Clear();
         OnTemporaryResourceChanged?.Invoke(new Dictionary<MineralData, (int, List<ResourceSource>)>(tempResources));
         UpdateDebugDisplay();
     }

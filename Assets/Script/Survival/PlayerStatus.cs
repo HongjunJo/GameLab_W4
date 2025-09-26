@@ -65,12 +65,14 @@ public class PlayerStatus : MonoBehaviour
     /// </summary>
     private void HandlePlayerDeath()
     {
+        if (isDead) return; // 이미 사망 처리 중이면 중복 실행 방지
+
         isDead = true;
 
         // 임시 인벤토리가 있다면, 내용물을 모두 잃고 리스폰 처리
         if (tempInventory != null)
         {
-            tempInventory.ClearAndRespawnAll();
+            tempInventory.DropAllItemsOnDeath();
         }
         Debug.Log("PlayerStatus: Player death detected");
         

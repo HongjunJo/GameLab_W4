@@ -142,10 +142,10 @@ public class HealthVignetteController : MonoBehaviour
         if (vignette == null) return;
 
         float healthPercent = currentHP / maxHP;
-        float newTargetIntensity = minIntensity;
-        float newTargetSmoothness = minSmoothness;
+        float newTargetIntensity = 0f; // 기본 목표 강도를 0으로 설정
+        float newTargetSmoothness = minSmoothness; // 기본 부드러움은 최소값으로 유지
 
-        // 체력이 설정된 임계값(Threshold) 이하로 떨어졌을 때만 효과를 계산합니다.
+        // 체력이 설정된 임계값(Threshold) 이하로 떨어졌을 때만 효과를 계산합니다. 그 이상일 경우 목표 강도는 0이 됩니다.
         if (healthPercent < healthThreshold)
         {
             // (healthThreshold ~ 0%) 구간을 (0 ~ 1) 범위로 정규화합니다.

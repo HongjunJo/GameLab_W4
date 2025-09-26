@@ -1534,6 +1534,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8584167948327856401}
     m_Modifications:
+    - target: {fileID: 24837945418018363, guid: 61c8eb32a171d2c4d874c9bd1fe1f92d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+    - target: {fileID: 250622963373409837, guid: 61c8eb32a171d2c4d874c9bd1fe1f92d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+    - target: {fileID: 567461428308974901, guid: 61c8eb32a171d2c4d874c9bd1fe1f92d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
     - target: {fileID: 989018572444430864, guid: 61c8eb32a171d2c4d874c9bd1fe1f92d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1654,6 +1666,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Resources UI
       objectReference: {fileID: 0}
+    - target: {fileID: 7699077802297521976, guid: 61c8eb32a171d2c4d874c9bd1fe1f92d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+    - target: {fileID: 8532648009047112296, guid: 61c8eb32a171d2c4d874c9bd1fe1f92d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
