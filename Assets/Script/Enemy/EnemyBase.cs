@@ -24,21 +24,12 @@ using System.Collections.Generic;
         CapsuleCollider2D col = GetComponent<CapsuleCollider2D>();
         if (col == null)
         {
-            Debug.LogWarning("[EnemyBase] CapsuleCollider2D not found!");
             return true;
         }
     Vector2 origin = new Vector2(col.bounds.center.x, col.bounds.min.y) + (Vector2)direction.normalized * 0.3f;
         RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, groundCheckDistance, groundLayer);
         #if UNITY_EDITOR
         Debug.DrawLine(origin, origin + Vector2.down * groundCheckDistance, hit ? Color.green : Color.red, 0.1f);
-        if (!hit)
-        {
-            Debug.Log($"[EnemyBase] No ground detected. origin={origin}, dir=down, dist={groundCheckDistance}, layer={groundLayer}");
-        }
-        else
-        {
-            Debug.Log($"[EnemyBase] Ground hit: {hit.collider.gameObject.name}, layer={LayerMask.LayerToName(hit.collider.gameObject.layer)}");
-        }
         #endif
         return hit;
     }
