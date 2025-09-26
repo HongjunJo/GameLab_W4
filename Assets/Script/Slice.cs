@@ -67,7 +67,7 @@ public class Slice : MonoBehaviour
         else
         {
             TargetBodies[currentHp - 1].GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-            TargetBodies[i].GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+            TargetBodies[currentHp - 1].GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
             StartCoroutine(DelBody(TargetBodies[currentHp - 1]));
             currentHp--;
         }
