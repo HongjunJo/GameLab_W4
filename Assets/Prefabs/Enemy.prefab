@@ -57,10 +57,10 @@ CapsuleCollider2D:
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 5111
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 5111
   m_ContactCaptureLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -148,13 +148,14 @@ MonoBehaviour:
   patrolWaitTime: 0.2
   chaseMemoryTime: 1
   followY: 0
-  detectionRadius: 5
+  detectionRadius: 2.5
   playerLayer:
     serializedVersion: 2
     m_Bits: 1
   moveSpeed: 2
   attackPower: 10
   maxHP: 30
+  chaseSpeed: 4
 --- !u!114 &1012127720512313149
 MonoBehaviour:
   m_ObjectHideFlags: 0

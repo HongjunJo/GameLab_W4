@@ -7,22 +7,22 @@ using System.Collections;
 /// </summary>
 public class InteractionPortal : MonoBehaviour
 {
-    [Header("포탈 설정")]
+    [Header("Portal Settings")]
     [SerializeField] private Transform teleportTarget; // 이동할 위치
     [SerializeField] private KeyCode interactionKey = KeyCode.W; // 상호작용 키
     [SerializeField] private float interactionRange = 3f; // 상호작용 범위
     
-    [Header("페이드 효과")]
+    [Header("Fade Effect")]
     [SerializeField] private float fadeTime = 0.5f; // 페이드 시간
     [SerializeField] private Color fadeColor = Color.black; // 페이드 색상
     
-    [Header("비용 (선택사항)")]
+    [Header("Cost (Optional)")]
     [SerializeField] private MineralData requiredMineral; // 필요한 광물
     [SerializeField] private int requiredAmount = 0; // 필요한 수량
     
-    [Header("포탈 정보")]
-    [SerializeField] private string portalName = "포탈"; // 포탈 이름
-    [SerializeField] private string destinationName = "목적지"; // 목적지 이름
+    [Header("Portal Info")]
+    [SerializeField] private string portalName = "Portal"; // 포탈 이름
+    [SerializeField] private string destinationName = "Destination"; // 목적지 이름
     
     private GameObject player;
     private bool isTeleporting = false;

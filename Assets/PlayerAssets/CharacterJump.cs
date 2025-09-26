@@ -52,6 +52,9 @@ public class CharacterJump : MonoBehaviour
     public bool onGround; // 현재 땅에 닿아있는지 여부
     private bool currentlyJumping; // 현재 점프 동작 중인지 여부
 
+    [Header("Ability Unlocks")]
+    public bool canDoubleJump = false; // 더블 점프 능력 해제/획득 상태
+
     private void Awake()
     {
         // 필수 컴포넌트들을 가져옵니다.
@@ -113,6 +116,11 @@ public class CharacterJump : MonoBehaviour
     {
         setPhysics();
         onGround = ground.GetOnGround();
+
+        // 더블점프 능력 해제 시 maxAirJumps를 0으로 고정
+        if (!canDoubleJump) maxAirJumps = 0;
+        // 더블점프 능력 획득 시 최소 1로 보장 (원래 값이 1 이상이면 유지)
+        else if (canDoubleJump && maxAirJumps < 1) maxAirJumps = 1;
 
         if (jumpBuffer > 0)
         {

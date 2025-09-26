@@ -4,12 +4,9 @@ using System.Collections.Generic;
 /// <summary>
 /// 적(Enemy) 기본 동작을 담당하는 베이스 클래스
 /// </summary>
-// ...existing code...
-// ...existing code...
-// ...existing code...
- [RequireComponent(typeof(Health))]
- public class EnemyBase : MonoBehaviour
- {
+[RequireComponent(typeof(Health))]
+public class EnemyBase : MonoBehaviour
+{
     // unreachablePlayerTimeLimit은 chaseMemoryTime과 항상 동일하게 사용
     private float unreachablePlayerTimer = 0f;
     [Header("Cliff Check")]
@@ -26,11 +23,11 @@ using System.Collections.Generic;
         {
             return true;
         }
-    Vector2 origin = new Vector2(col.bounds.center.x, col.bounds.min.y) + (Vector2)direction.normalized * 0.3f;
+        Vector2 origin = new Vector2(col.bounds.center.x, col.bounds.min.y) + (Vector2)direction.normalized * 0.3f;
         RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, groundCheckDistance, groundLayer);
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         Debug.DrawLine(origin, origin + Vector2.down * groundCheckDistance, hit ? Color.green : Color.red, 0.1f);
-        #endif
+#endif
         return hit;
     }
     [Header("Patrol Settings")]
@@ -56,6 +53,8 @@ using System.Collections.Generic;
     public int AttackPower => attackPower;
     [Header("HP Settings")]
     [SerializeField] protected float maxHP = 30f;
+    [Header("추격 속도 설정")]
+    [SerializeField] private float chaseSpeed = 3f;
 
     protected Health health;
 
@@ -133,10 +132,10 @@ using System.Collections.Generic;
 
     private void FollowPlayer()
     {
-    // X축만 또는 X,Y축 모두 따라가기
+        // X축만 또는 X,Y축 모두 따라가기
         float targetY = followY ? playerTarget.position.y : transform.position.y;
         Vector3 targetPos = new Vector3(playerTarget.position.x, targetY, transform.position.z);
-        float step = moveSpeed * Time.deltaTime;
+        float step = chaseSpeed * Time.deltaTime;
         Vector3 moveDir = (targetPos - transform.position).normalized;
         if (IsGroundAhead(moveDir))
         {
