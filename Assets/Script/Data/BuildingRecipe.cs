@@ -2,18 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
 
-[System.Serializable]
-public class ResourceCost
-{
-    public MineralData mineral;
-    public int amount;
-    
-    public ResourceCost(MineralData mineral, int amount)
-    {
-        this.mineral = mineral;
-        this.amount = amount;
-    }
-}
 
 [CreateAssetMenu(fileName = "New Building Recipe", menuName = "Game Data/Building Recipe")]
 public class BuildingRecipe : ScriptableObject
