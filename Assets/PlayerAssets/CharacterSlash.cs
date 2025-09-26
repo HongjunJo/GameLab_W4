@@ -93,7 +93,7 @@ public class CharacterSlash : MonoBehaviour
         else
         {
             Sword.transform.localScale = new Vector3(1, 1 * currentSwordLength, 1);
-            Slash.transform.localScale = new Vector3(0.5f*currentSwordLength,0.5f*currentSwordLength,1);
+            Slash.transform.localScale = new Vector3(0.5f,0.7f,1) + new Vector3(0.5f*currentSwordLength,0.7f*currentSwordLength,1);
         }
         
     }
