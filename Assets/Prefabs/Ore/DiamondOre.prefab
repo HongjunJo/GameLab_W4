@@ -1014,6 +1014,7 @@ GameObject:
   - component: {fileID: 1216368460805487377}
   - component: {fileID: 8218352064786667859}
   - component: {fileID: 2236755603506407837}
+  - component: {fileID: 595940947474197830}
   m_Layer: 10
   m_Name: DiamondOre
   m_TagString: Ore
@@ -1113,12 +1114,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 155a812ce81b8f4429253f355b3f85f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 6595209573849961549}
-  OreBodies: []
   DropObject: {fileID: 4250622247416391985, guid: 09da55db59412674f84bb8e52115fd1d, type: 3}
-  bodyRemainTime: 2
-  respawnTime: 3
-  maxHp: 3
+--- !u!114 &595940947474197830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8455590230970903148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69d004e79aa6c554ca127991914c068a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 6595209573849961549}
+  TargetBodies: []
+  bodyRemainTime: 1
+  respawnTime: 1
+  maxHp: 0
   currentHp: 0
 --- !u!1 &8715426295527772215
 GameObject:
