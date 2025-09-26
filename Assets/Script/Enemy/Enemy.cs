@@ -17,6 +17,9 @@ public class Enemy : MonoBehaviour
     public void SliceStart()
     {
         GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<EnemyBase>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+        GetComponent<Rigidbody2D>().simulated = false;
         Slice.SetActive(true);
         Invoke("DestroyThis", 3f);
     }

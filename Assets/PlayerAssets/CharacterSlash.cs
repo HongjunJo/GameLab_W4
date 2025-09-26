@@ -4,7 +4,6 @@ public class CharacterSlash : MonoBehaviour
 {
     [SerializeField] DangerGaugeSystem dangerGaugeSystem;
     [SerializeField] LayerMask layerMask;
-    [SerializeField] Transform target;
     [SerializeField] GameObject Sword;
     [SerializeField] GameObject Slash;
     private Collider2D[] hitList = new Collider2D[50];
@@ -27,6 +26,12 @@ public class CharacterSlash : MonoBehaviour
     
     //베는 중
     private bool isSlash = false;
+
+    [SerializeField] SpriteRenderer spriteRenderer;
+
+    void Start()
+    {
+    }
 
     // Update is called once per frame
     void Update()
@@ -96,29 +101,46 @@ public class CharacterSlash : MonoBehaviour
     {
         slashTempTime = 0;
         isSlash = true;
-        hitList = Physics2D.OverlapCircleAll(transform.position+ new Vector3(0.5f,0f,0f), 0.75f * currentSwordLength, layerMask);
+        // hitList = Physics2D.OverlapCircleAll(transform.position+ new Vector3(0.5f,0f,0f), 0.75f * currentSwordLength, layerMask);
+        // float width = spriteRenderer.bounds.size.x;   // 월드 단위 가로
+        // float height = spriteRenderer.bounds.size.y;  // 월드 단위 세로
+        // Vector3 boxCenter = transform.position + new Vector3(width / 2f, -0.1f, 0f) + new Vector3(0.3f,0f,0f);
+        // Vector2 boxSize = new Vector2(width, height);
+
+        // hitList = Physics2D.OverlapBoxAll(boxCenter, boxSize, 0f, layerMask);
         //베기 공기 소모 활성화시
         if (SlashUseAirMode)
             dangerGaugeSystem.DecreaseDanger(slashReduceAir);
-        foreach (Collider2D hit in hitList)
-        {
-            if (hit.CompareTag("Enemy"))
-            {
-                hit.GetComponent<Enemy>().SliceStart();
+        // foreach (Collider2D hit in hitList)
+        // {
+        //     if (hit.CompareTag("Enemy"))
+        //     {
+        //         hit.GetComponent<Enemy>().SliceStart();
 
-            }
-            if (hit.CompareTag("Ore"))
-            {
-                hit.GetComponent<Ore>().SliceStart();
-            }
+        //     }
+        //     if (hit.CompareTag("Ore"))
+        //     {
+        //         hit.GetComponent<Ore>().SliceStart();
+        //     }
 
-        }
-        
+        // }
     }
-    void OnDrawGizmos() // 범위 그리기
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position + new Vector3(0.5f,0f,0f),0.75f * currentSwordLength);
-    }
+    // void OnDrawGizmos() // 범위 그리기
+    // {
+    //     // Gizmos.color = Color.red;
+    //     // Gizmos.DrawWireSphere(transform.position + new Vector3(0.5f,0f,0f),0.75f * currentSwordLength);
+
+    //     float width = spriteRenderer.bounds.size.x;   // 월드 단위 가로
+    //     float height = spriteRenderer.bounds.size.y;  // 월드 단위 세로
+
+    //     // 왼쪽 끝을 기준으로 중앙으로 이동
+    //     Vector3 boxCenter = transform.position + new Vector3(width / 2f, -0.1f, 0f) + new Vector3(0.3f,0f,0f);
+    //     Vector2 boxSize = new Vector2(width, height);
+
+    //     // // 색상
+    //     Gizmos.color = Color.red;
+    //     // 박스 그리기
+    //     Gizmos.DrawWireCube(boxCenter, boxSize);
+    // }
 
 }
