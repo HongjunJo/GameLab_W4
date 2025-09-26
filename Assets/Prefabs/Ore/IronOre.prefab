@@ -1753,7 +1753,8 @@ MonoBehaviour:
   - {fileID: 1601199973356567457}
   - {fileID: 541164654911389086}
   - {fileID: 437144175610476812}
-  DropObject: {fileID: 4250622247416391985, guid: 3828aa049bbd7f847bd38011a751ec8f, type: 3}
+  DropObject: {fileID: 4250622247416391985, guid: 6989599bb2a9f684f9166c740a02874e, type: 3}
+  respawnTime: 0
 --- !u!1 &8666759971902398287
 GameObject:
   m_ObjectHideFlags: 0

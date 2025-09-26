@@ -5809,7 +5809,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &503118408
 Transform:
   m_ObjectHideFlags: 0
@@ -10744,7 +10744,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &829279794
 Transform:
   m_ObjectHideFlags: 0
@@ -10775,6 +10775,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OreBodies: []
   DropObject: {fileID: 0}
+  respawnTime: 0
 --- !u!1 &832348332
 GameObject:
   m_ObjectHideFlags: 0
@@ -20992,6 +20993,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2236755603506407837, guid: 203a4ae6ca772cf46a18e0e3625f5cc0, type: 3}
+      propertyPath: respawnTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8455590230970903148, guid: 203a4ae6ca772cf46a18e0e3625f5cc0, type: 3}
       propertyPath: m_Name
       value: CopperOre
@@ -25121,7 +25126,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -26618,7 +26623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1631466245151880626, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2156490412425270726, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
       propertyPath: m_Layer
@@ -26646,7 +26651,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5212341716560732870, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
-      value: 3584
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6415049622397704147, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
       propertyPath: m_Layer
@@ -26678,11 +26683,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8256919189910324091, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
       propertyPath: m_ForceSendLayers.m_Bits
-      value: 3327
+      value: 255
       objectReference: {fileID: 0}
     - target: {fileID: 8256919189910324091, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
       propertyPath: m_ForceReceiveLayers.m_Bits
-      value: 3327
+      value: 255
       objectReference: {fileID: 0}
     - target: {fileID: 8429762376222386602, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
       propertyPath: m_Layer

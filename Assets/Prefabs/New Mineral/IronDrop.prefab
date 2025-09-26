@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 827520128594865331}
   - component: {fileID: 9132333574502843911}
   - component: {fileID: 3534054275461737648}
+  - component: {fileID: 5943911192326260021}
   m_Layer: 0
   m_Name: IronDrop
   m_TagString: DropOre
@@ -93,6 +94,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentOre: 0
+--- !u!114 &5943911192326260021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4250622247416391985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd844e5c854c6ce47a2866d6619ab879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mineralData: {fileID: 11400000, guid: d4faacb5762670b4ab25be6bfa77dc8b, type: 2}
+  amount: 1
+  isRandomAmount: 0
+  minAmount: 1
+  maxAmount: 3
+  visualObject: {fileID: 6499594193240074884}
+  interactionRange: 2
+  interactionText: Collect
 --- !u!1 &6499594193240074884
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +178,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 00224219a86eb874ba0a3247973ee612, type: 2}
+  - {fileID: 2100000, guid: aabc8b9b69ea33b469531db5542120ba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
