@@ -48,7 +48,7 @@ public class Slice : MonoBehaviour
             TargetBodies[i].SetActive(true);
         }
         GetComponent<CapsuleCollider2D>().enabled = true;
-        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        GetComponent<Rigidbody2D>().gravityScale = 1;
     }
     void DelTarget()
     {
@@ -79,14 +79,13 @@ public class Slice : MonoBehaviour
         if (GetComponent<EnemyBase>() != null && currentHp == 1)
         {
             DelTarget();
-            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+            GetComponent<Rigidbody2D>().gravityScale = 0;
         }
         yield return new WaitForSeconds(bodyRemainTime);
         _body.SetActive(false);
         if (GetComponent<EnemyBase>() != null && currentHp == 1)
         {
             TargetBodies[currentHp - 1].SetActive(false);
-            DelTarget();
         }
             
     }
