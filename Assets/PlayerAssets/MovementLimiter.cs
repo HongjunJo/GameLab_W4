@@ -6,6 +6,7 @@ public class MovementLimiter : MonoBehaviour
 
     [SerializeField] public bool _initialCharacterCanMove = true;
     public bool CharacterCanMove;
+    public bool CharacterCanRotate;
 
     private void OnEnable()
     {
@@ -20,7 +21,7 @@ public class MovementLimiter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     /// <summary>
@@ -30,5 +31,14 @@ public class MovementLimiter : MonoBehaviour
     public void SetCanMove(bool canMove)
     {
         CharacterCanMove = canMove;
+    }
+    
+    /// <summary>
+    /// 캐릭터의 회전 가능 상태를 설정합니다.
+    /// </summary>
+    /// <param name="canRotaion">이동 가능 여부</param>
+    public void SetCanRotaion(bool canRotaion)
+    {
+        CharacterCanRotate = canRotaion;
     }
 }

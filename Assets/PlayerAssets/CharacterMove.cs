@@ -104,7 +104,7 @@ public class CharacterMove : MonoBehaviour
             directionX = 0;
         }
 
-        if (directionX != 0)
+        if (directionX != 0 && MovementLimiter.Instance.CharacterCanRotate)
         {
             transform.localScale = new Vector3(directionX > 0 ? playerSize : -playerSize, playerSize, 1);
             pressingKey = true;
