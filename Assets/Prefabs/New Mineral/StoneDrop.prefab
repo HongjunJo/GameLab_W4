@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9132333574502843911}
   - component: {fileID: 3534054275461737648}
   - component: {fileID: 4884361456816325995}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: StoneDrop
   m_TagString: DropOre
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 4456788257268007883}
   - component: {fileID: 5977643849232010168}
   - component: {fileID: 280990500880782643}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ResourceVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 00224219a86eb874ba0a3247973ee612, type: 2}
+  - {fileID: 2100000, guid: 991f599c8af36a747a224856a0636edf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

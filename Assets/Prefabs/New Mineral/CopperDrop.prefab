@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9132333574502843911}
   - component: {fileID: 3534054275461737648}
   - component: {fileID: 1053337402577066263}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CopperDrop
   m_TagString: DropOre
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa05968ebbfec0047a54bc266c9fdb00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentOre: 0
+  currentOre: 1
 --- !u!114 &1053337402577066263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 4456788257268007883}
   - component: {fileID: 5977643849232010168}
   - component: {fileID: 280990500880782643}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ResourceVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
