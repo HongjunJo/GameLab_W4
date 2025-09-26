@@ -43,7 +43,7 @@ public class TemporaryInventory : MonoBehaviour
             tempResources[mineral] = (amount, new List<ResourceSource> { source });
         }
 
-        Debug.Log($"[임시] {mineral.mineralName} {amount}개 추가. 현재 임시 보유량: {tempResources[mineral].amount}");
+        Debug.Log($"[임시] {mineral.name} {amount}개 추가. 현재 임시 보유량: {tempResources[mineral].amount}");
         UpdateDebugDisplay();
 
         // 임시 인벤토리 변경 사항을 UI에 알립니다.
@@ -85,7 +85,7 @@ public class TemporaryInventory : MonoBehaviour
             // 남는 양을 50% 내림으로 계산합니다.
             int amountToKeep = Mathf.FloorToInt(currentAmount * 0.5f);
             int amountToLose = currentAmount - amountToKeep;
-            Debug.Log($"{mineral.mineralName} {currentAmount}개 중 {amountToLose}개를 잃고 {amountToKeep}개가 남습니다.");
+            Debug.Log($"{mineral.name} {currentAmount}개 중 {amountToLose}개를 잃고 {amountToKeep}개가 남습니다.");
 
 
             // 잃을 양만큼 자원 소스를 찾아 리스폰시킵니다.
