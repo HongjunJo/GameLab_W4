@@ -163,6 +163,51 @@ public class ResourceManager : MonoBehaviour
     }
     
     /// <summary>
+    /// 여러 자원을 한 번에 지불할 수 있는지 확인하는 메서드 (상점용)
+    /// </summary>
+    /// <param name="costs">필요한 자원과 양의 목록 (AbilityData.ResourceCost)</param>
+    /// <returns>모든 자원이 충분하면 true, 하나라도 부족하면 false</returns>
+    public bool CanAfford(List<ResourceCost> costs)
+    {
+        if (costs == null) return true; // 비용이 없으면 항상 구매 가능
+
+        foreach (var cost in costs)
+        {
+            // GetResourceAmount는 이미 ResourceManager에 있는 메서드를 사용합니다.
+            if (GetResourceAmount(cost.mineral) < cost.amount)
+            {
+                return false; // 자원 중 하나라도 부족하면 즉시 false 반환
+            }
+        }
+        return true; // 모든 자원이 충분하면 true 반환
+    }
+
+    /// <summary>
+    /// 여러 자원을 한 번에 소모하는 메서드 (상점용)
+    /// </summary>
+    /// <param name="costs">소모할 자원과 양의 목록</param>
+    /// <returns>자원 소모에 성공하면 true, 실패(자원 부족)하면 false</returns>
+    public bool TrySpendResources(List<ResourceCost> costs)
+    {
+        // 먼저 지불 가능한지 다시 확인합니다.
+        if (!CanAfford(costs))
+        {
+            Debug.LogWarning("자원이 부족하여 소모할 수 없습니다.");
+            return false;
+        }
+
+        // 자원을 실제로 소모합니다.
+        foreach (var cost in costs)
+        {
+            // 자원을 소모하기 위해 UseResource 메서드를 호출합니다.
+            UseResource(cost.mineral, cost.amount);
+        }
+
+        Debug.Log("자원을 성공적으로 소모했습니다.");
+        return true;
+    }
+    
+    /// <summary>
     /// 디버그용 인스펙터 표시 업데이트
     /// </summary>
     private void UpdateDebugDisplay()
