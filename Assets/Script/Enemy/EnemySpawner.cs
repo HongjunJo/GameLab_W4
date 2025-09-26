@@ -22,6 +22,9 @@ public class EnemySpawner : MonoBehaviour
     [Header("Debug")] 
     [SerializeField] private bool showGizmos = true;
 
+    [Header("Spawn Control")]
+    [SerializeField] private bool spawnOn = true;
+
     private float spawnTimer = 0f;
     private float spawnTimeElapsed = 0f;
     private bool spawning = false;
@@ -48,6 +51,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
+        if (!spawnOn) return;
         if (!spawning || allOreMined) return;
 
         if (useSpawnDuration)
