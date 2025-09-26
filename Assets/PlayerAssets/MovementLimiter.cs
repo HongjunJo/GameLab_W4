@@ -6,7 +6,7 @@ public class MovementLimiter : MonoBehaviour
 
     [SerializeField] public bool _initialCharacterCanMove = true;
     public bool CharacterCanMove;
-    public bool CharacterCanRotate;
+    public bool CharacterCanRotate = true;
 
     private void OnEnable()
     {
