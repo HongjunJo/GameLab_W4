@@ -48,6 +48,10 @@ public class Slice : MonoBehaviour
             TargetBodies[i].SetActive(true);
         }
         GetComponent<CapsuleCollider2D>().enabled = true;
+        if (GetComponent<EnemyBase>() != null)
+        {
+            GetComponent<Rigidbody2D>().simulated = true;
+        }
     }
     void DelTarget()
     {
@@ -75,9 +79,9 @@ public class Slice : MonoBehaviour
     }
     private IEnumerator DelBody(GameObject _body)
     {
-        if (GetComponent<EnemyBase>() != null && currentHp == 1)
+        if (GetComponent<EnemyBase>() != null && currentHp == 2)
         {
-            GetComponent<EnemyBase>().enabled = false;
+            GetComponent<Rigidbody2D>().simulated = false;
         }
         yield return new WaitForSeconds(bodyRemainTime);
         _body.SetActive(false);
