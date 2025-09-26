@@ -26633,15 +26633,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4210176281122859673, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
       propertyPath: m_Pivot.y
-      value: 0.35
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4210176281122859673, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4210176281122859673, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4210176281122859673, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.5
+      value: -0.41
       objectReference: {fileID: 0}
     - target: {fileID: 4210176281122859673, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.14999992
+      value: -0.49999997
       objectReference: {fileID: 0}
     - target: {fileID: 4437350377376222277, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
       propertyPath: m_Layer
@@ -26672,12 +26680,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8167105866984882578, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 8167105866984882578, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8167105866984882578, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.61
+      value: 1.88
       objectReference: {fileID: 0}
     - target: {fileID: 8167105866984882578, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.02
+      value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: 8256919189910324091, guid: 849f276d0cc07ae4c83fb8dc96279897, type: 3}
       propertyPath: m_ForceSendLayers.m_Bits

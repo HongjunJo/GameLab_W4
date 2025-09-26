@@ -9,7 +9,7 @@ public class CharacterSlash : MonoBehaviour
     private Collider2D[] hitList = new Collider2D[50];
     
     //현재 검 길이
-    private float currentSwordLength = 1f;
+    [SerializeField] private float currentSwordLength = 1f;
     //평타 쿨
     [SerializeField] private float slashCoolTime = 0.15f;
     private float slashTempTime = 0;
@@ -93,7 +93,7 @@ public class CharacterSlash : MonoBehaviour
         else
         {
             Sword.transform.localScale = new Vector3(1, 1 * currentSwordLength, 1);
-            Slash.transform.localScale = new Vector3(1*currentSwordLength,1,1);
+            Slash.transform.localScale = new Vector3(0.5f*currentSwordLength,0.5f*currentSwordLength,1);
         }
         
     }
