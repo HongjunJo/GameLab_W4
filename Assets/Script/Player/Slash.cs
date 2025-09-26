@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Slash : MonoBehaviour
 {
+    [SerializeField] Transform target;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,7 +21,7 @@ public class Slash : MonoBehaviour
         {
             // collision.GetComponent<Slice>().SliceStart();
 
-            RaycastHit2D hit = Physics2D.Linecast(transform.position, collision.transform.position, LayerMask.GetMask("Ground"));
+            RaycastHit2D hit = Physics2D.Linecast(target.position, collision.transform.position, LayerMask.GetMask("Ground"));
 
             if (hit.collider == null) // 벽에 막히지 않음
             {
