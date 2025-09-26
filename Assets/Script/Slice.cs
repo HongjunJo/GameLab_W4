@@ -27,6 +27,7 @@ public class Slice : MonoBehaviour
         for (int i = 0; i < target.childCount; i++)
         {
             TargetBodies[i] = target.GetChild(i).gameObject;
+            
         }
         for (int i = 0; i < TargetBodies.Length; i++)
         {
@@ -42,6 +43,7 @@ public class Slice : MonoBehaviour
         {
             TargetBodies[i].SetActive(true);
             TargetBodies[i].GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            TargetBodies[i].GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
             TargetBodies[i].transform.SetPositionAndRotation(SavedBodyPos[i], SavedBodyRotaion[i]);
             TargetBodies[i].SetActive(true);
         }
@@ -65,6 +67,7 @@ public class Slice : MonoBehaviour
         else
         {
             TargetBodies[currentHp - 1].GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+            TargetBodies[i].GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
             StartCoroutine(DelBody(TargetBodies[currentHp - 1]));
             currentHp--;
         }
