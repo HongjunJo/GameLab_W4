@@ -1101,6 +1101,7 @@ GameObject:
   - component: {fileID: 1216368460805487377}
   - component: {fileID: 8218352064786667859}
   - component: {fileID: 2236755603506407837}
+  - component: {fileID: 4586131753884531307}
   m_Layer: 10
   m_Name: StoneOre
   m_TagString: Ore
@@ -1200,10 +1201,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 155a812ce81b8f4429253f355b3f85f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 8250101859792887224}
-  OreBodies: []
   DropObject: {fileID: 4250622247416391985, guid: 2197ba9fb8e927448b44fd93d6615e25, type: 3}
-  bodyRemainTime: 2
-  respawnTime: 3
-  maxHp: 3
+--- !u!114 &4586131753884531307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8455590230970903148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69d004e79aa6c554ca127991914c068a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 8250101859792887224}
+  TargetBodies: []
+  bodyRemainTime: 1
+  respawnTime: 1
+  maxHp: 0
   currentHp: 0
