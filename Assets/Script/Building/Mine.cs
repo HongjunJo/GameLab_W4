@@ -71,7 +71,7 @@ public class Mine : MonoBehaviour, IInteractable
             BuildMine();
         }
     }
-    
+
     public string GetInteractionText()
     {
         // 이미 건설되었다면 상호작용 텍스트를 표시하지 않음
@@ -87,7 +87,8 @@ public class Mine : MonoBehaviour, IInteractable
                 return $"Build {activationRecipe.recipeName}\n<color=red>Need more resources</color>\n{costText}";
             }
         }
-        return $"{activationRecipe.recipeName} (Built)\nPress 'W' to Teleport";
+        // return $"{activationRecipe.recipeName} (Built)\nPress 'W' to Teleport";
+        return null;
     }
     
     /// <summary>
