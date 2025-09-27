@@ -72,17 +72,19 @@ public class Health : MonoBehaviour
         HPChanged?.Invoke(currentHP, maxHP);
         lastDamageTime = Time.time;
 
-        // 넉백 적용 (공격자 기준, 2D 전체 방향)
-        if (knockbackForce > 0f && attacker != null)
-        {
-            Vector2 dir = ((Vector2)transform.position - (Vector2)attacker.transform.position).normalized;
-            Rigidbody2D rb = GetComponentInChildren<Rigidbody2D>();
-            if (rb != null)
+        // 넉백 적용 (공격자 기준, 좌우 방향을 더 강조)
+            if (knockbackForce > 0f && attacker != null)
             {
-                rb.linearVelocity = Vector2.zero;
-                rb.AddForce(dir * knockbackForce, ForceMode2D.Impulse);
+                Vector2 dir = ((Vector2)transform.position - (Vector2)attacker.transform.position).normalized;
+                // x 성분을 더 크게(더 수평으로), y는 거의 0에 가깝게
+                dir = new Vector2(Mathf.Sign(dir.x) * 2f, Mathf.Clamp(dir.y, -0.15f, 0.15f)).normalized;
+                Rigidbody2D rb = GetComponentInChildren<Rigidbody2D>();
+                if (rb != null)
+                {
+                    rb.linearVelocity = Vector2.zero;
+                    rb.AddForce(dir * knockbackForce * 1.5f, ForceMode2D.Impulse);
+                }
             }
-        }
 
         // 무적 및 깜빡임 효과
         if (blinkCoroutine != null)
