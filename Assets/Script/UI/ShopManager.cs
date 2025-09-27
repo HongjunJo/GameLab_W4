@@ -153,7 +153,7 @@ public class ShopManager : MonoBehaviour
                 // 현재 두 번째 줄에 있다면 (인덱스 4-6)
                 else
                 {
-                    // 구매 버튼으로 이동
+                    // 두 번째 줄에서는 아래로 누르면 무조건 구매 버튼으로 이동합니다.
                     SelectPurchaseButton();
                 }
             }
@@ -174,6 +174,12 @@ public class ShopManager : MonoBehaviour
                 // confirmedSelectionIndex가 유효하면 그곳으로, 아니면 두 번째 줄 중앙 버튼으로 갑니다.
                 int returnIndex = (confirmedSelectionIndex != -1) ? confirmedSelectionIndex : row1Count + 1;
                 SelectButton(returnIndex);
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                // 구매 버튼에서 아래 방향키를 누르면 아무 동작도 하지 않도록 막습니다.
+                // 이렇게 하면 인덱스 6번으로 이동하는 버그가 해결됩니다.
+                return;
             }
         }
 
@@ -219,6 +225,7 @@ public class ShopManager : MonoBehaviour
             {
                 selectedButtonIndex = newIndex;
                 abilityButtons[selectedButtonIndex].Select();
+                // SelectAbility(selectedButtonIndex); // 방향키 이동 시에는 상세 정보 자동 업데이트 안 함
                 return;
             }
 
@@ -232,13 +239,11 @@ public class ShopManager : MonoBehaviour
 
     private void SelectPurchaseButton()
     {
-        // 구매 버튼이 활성화 상태일 때만 선택 가능
-        if (purchaseButton != null && purchaseButton.interactable)
-        {
-            selectedButtonIndex = abilityButtons.Count;
-            // Unity의 EventSystem을 사용하여 구매 버튼을 하이라이트 처리
-            purchaseButton.Select();
-        }
+        // 구매 버튼의 활성화 여부와 관계없이 포커스를 이동시킵니다.
+        // 이를 통해 사용자는 시각적으로 현재 선택 위치를 알 수 있습니다.
+        selectedButtonIndex = abilityButtons.Count;
+        // Unity의 EventSystem을 사용하여 구매 버튼을 하이라이트 처리
+        purchaseButton.Select();
     }
 
     // 능력 버튼 클릭 시 호출
@@ -462,6 +467,7 @@ public class ShopManager : MonoBehaviour
             {
                 // 활성화된 첫 번째 버튼을 찾으면 그곳으로 이동하고 종료
                 SelectButton(i);
+                ClearSelection(); // 포커스 이동 후, 상세 정보 창을 초기화합니다.
                 return;
             }
         }
