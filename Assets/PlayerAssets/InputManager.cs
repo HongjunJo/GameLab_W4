@@ -59,8 +59,6 @@ public class InputManager : MonoBehaviour
         playerInput.Player.HorizontalRight.performed += OnPressD;
         playerInput.Player.HorizontalLeft.canceled += OffPressA;
         playerInput.Player.HorizontalRight.canceled += OffPressD;
-        playerInput.Player.MovementHoriAxis.performed += OnHoriAxis;
-        playerInput.Player.MovementHoriAxis.canceled += OnHoriAxis;
 
         /*
         // 대각선 무시
@@ -88,9 +86,6 @@ public class InputManager : MonoBehaviour
         playerInput.Player.HorizontalRight.performed -= OnPressD;
         playerInput.Player.HorizontalLeft.canceled -= OffPressA;
         playerInput.Player.HorizontalRight.canceled -= OffPressD;
-        playerInput.Player.MovementHoriAxis.performed -= OnHoriAxis;
-        playerInput.Player.MovementHoriAxis.canceled -= OnHoriAxis;
-
 
         /*
         // 대각선 무시
@@ -132,6 +127,11 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // [수정됨] 'Move' 액션의 Vector2 값에서 x축 값만 읽어와 MovementAD 이벤트로 전달합니다.
+        // 이렇게 하면 A/D, 방향키, 게임패드 스틱 입력이 모두 처리됩니다.
+        // CharacterMove.cs가 이 값을 직접 읽어가므로, 이 코드는 다른 스크립트가 수평 이동 값을 필요로 할 경우를 대비해 유지할 수 있습니다.
+        MovementAD?.Invoke(playerInput.Player.Move.ReadValue<Vector2>().x);
+
         if (playerInput.Player.PrimaryClick.IsPressed())
             isDragging = true;
         else
@@ -244,11 +244,5 @@ public class InputManager : MonoBehaviour
     private void OffPressD(InputAction.CallbackContext context)
     {
         ReleaseD?.Invoke();
-    }
-
-    private void OnHoriAxis(InputAction.CallbackContext context)
-    {
-        float movement = context.ReadValue<float>();
-        MovementAD?.Invoke(movement);
     }
 }

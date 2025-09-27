@@ -783,7 +783,7 @@ MonoBehaviour:
   reduceAir: 0.5
   slashReduceAir: 5
   SlashUseAirMode: 0
-  maxSwordLength: 10
+  maxSwordLength: 6
   sizeOffset: 0.05
   spriteRenderer: {fileID: 4334452082995165650}
 --- !u!114 &2906978922175870140
