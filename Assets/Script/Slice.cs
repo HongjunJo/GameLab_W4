@@ -130,6 +130,7 @@ public class Slice : MonoBehaviour
                 GetComponent<OxygenStone>().ActiveSafeZone();
             if (GetComponent<Ore>() != null)
                 GetComponent<Ore>().DropOre();    
+            yield break;
         }
     }
 }
