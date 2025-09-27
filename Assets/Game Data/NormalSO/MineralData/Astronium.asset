@@ -19,4 +19,4 @@ MonoBehaviour:
   maxHp: 3
   miningDamage: 1
   miningDuration: 10
-  respawnTime: 0
+  respawnTime: 1

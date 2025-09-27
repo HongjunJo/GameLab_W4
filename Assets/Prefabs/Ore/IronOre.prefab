@@ -1214,6 +1214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69d004e79aa6c554ca127991914c068a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyOnDeath: 0
   target: {fileID: 3219040331955997926}
   TargetBodies: []
   bodyRemainTime: 1
