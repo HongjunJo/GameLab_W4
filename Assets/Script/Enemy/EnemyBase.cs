@@ -282,7 +282,7 @@ public class EnemyBase : MonoBehaviour
                 if (rb != null && otherRb != null)
                 {
                     Vector2 pushDir = (rb.position - otherRb.position).normalized;
-                    float pushForce = 1f;
+                    float pushForce = 1.5f;
                     rb.AddForce(pushDir * pushForce, ForceMode2D.Impulse);
                     otherRb.AddForce(-pushDir * pushForce, ForceMode2D.Impulse);
                 }
