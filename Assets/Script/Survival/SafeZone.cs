@@ -365,7 +365,7 @@ public class SafeZone : MonoBehaviour
             Debug.Log($"Player exited safe zone: {gameObject.name}");
         }
     }
-    
+
     /// <summary>
     /// 안전지대 활성화
     /// </summary>
