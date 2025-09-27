@@ -7,6 +7,9 @@ using System.Collections.Generic;
 [RequireComponent(typeof(Health))]
 public class EnemyBase : MonoBehaviour
 {
+    // 적끼리 충돌 후 방향 반전 쿨타임
+    private float enemyBounceCooldown = 0f;
+    private const float ENEMY_BOUNCE_COOLDOWN_TIME = 0.2f;
     public enum AutoPatrolStartDir { Left, Right, Random }
     [Header("Auto Patrol Settings")]
     [SerializeField] private AutoPatrolStartDir autoPatrolStartDir = AutoPatrolStartDir.Left;
@@ -85,8 +88,11 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
-    protected virtual void Update()
-    {
+        protected virtual void Update()
+        {
+            // 적끼리 충돌 쿨타임 감소
+            if (enemyBounceCooldown > 0f)
+                enemyBounceCooldown -= Time.deltaTime;
         DetectPlayer();
         if (isPlayerDetected && playerTarget != null)
         {
@@ -121,9 +127,17 @@ public class EnemyBase : MonoBehaviour
         Vector3 targetPoint = patrolPoints[currentPatrolIndex];
         float step = moveSpeed * Time.deltaTime;
         Vector3 moveDir = (targetPoint - transform.position).normalized;
-        if (IsGroundAhead(moveDir))
+        if (followY)
         {
+            // Y축 따라가기 시 바닥 체크 없이 이동
             transform.position = Vector3.MoveTowards(transform.position, targetPoint, step);
+        }
+        else
+        {
+            if (IsGroundAhead(moveDir))
+            {
+                transform.position = Vector3.MoveTowards(transform.position, targetPoint, step);
+            }
         }
 
         if (Vector3.Distance(transform.position, targetPoint) < 0.05f)
@@ -186,19 +200,28 @@ public class EnemyBase : MonoBehaviour
         Vector3 targetPos = new Vector3(playerTarget.position.x, targetY, transform.position.z);
         float step = chaseSpeed * Time.deltaTime;
         Vector3 moveDir = (targetPos - transform.position).normalized;
-        if (IsGroundAhead(moveDir))
+        if (followY)
         {
+            // 바닥 확인 없이 바로 이동
             transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
             unreachablePlayerTimer = 0f;
         }
         else
         {
-            unreachablePlayerTimer += Time.deltaTime;
-            if (unreachablePlayerTimer >= chaseMemoryTime)
+            if (IsGroundAhead(moveDir))
             {
-                // 추적 포기, 패트롤로 복귀
-                isPlayerDetected = false;
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
                 unreachablePlayerTimer = 0f;
+            }
+            else
+            {
+                unreachablePlayerTimer += Time.deltaTime;
+                if (unreachablePlayerTimer >= chaseMemoryTime)
+                {
+                    // 추적 포기, 패트롤로 복귀
+                    isPlayerDetected = false;
+                    unreachablePlayerTimer = 0f;
+                }
             }
         }
     }
@@ -245,6 +268,26 @@ public class EnemyBase : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         TryDamagePlayer(collision.gameObject);
+        // 적이 다른 적과 부딪히면 방향 반전 (쿨타임 적용) + 살짝 밀어내기
+        if (collision.gameObject != null && collision.gameObject != this.gameObject)
+        {
+            EnemyBase otherEnemy = collision.gameObject.GetComponent<EnemyBase>();
+            if (otherEnemy != null && enemyBounceCooldown <= 0f)
+            {
+                autoPatrolDir *= -1;
+                enemyBounceCooldown = ENEMY_BOUNCE_COOLDOWN_TIME;
+                // 서로를 살짝 밀어냄
+                Rigidbody2D rb = GetComponent<Rigidbody2D>();
+                Rigidbody2D otherRb = collision.gameObject.GetComponent<Rigidbody2D>();
+                if (rb != null && otherRb != null)
+                {
+                    Vector2 pushDir = (rb.position - otherRb.position).normalized;
+                    float pushForce = 1f;
+                    rb.AddForce(pushDir * pushForce, ForceMode2D.Impulse);
+                    otherRb.AddForce(-pushDir * pushForce, ForceMode2D.Impulse);
+                }
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
