@@ -81,8 +81,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.90196085, g: 0.627451, b: 0.3647059, a: 1}
+  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Color: {r: 0.34901962, g: 0.4156863, b: 0.45098042, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -581,7 +581,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.48235297, g: 0.18431373, b: 0.74509805, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -673,7 +673,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.6627451, g: 0.6627451, b: 0.6627451, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -696,6 +696,7 @@ GameObject:
   - component: {fileID: 1101483890116318183}
   - component: {fileID: 6985449078994957066}
   - component: {fileID: 4554223871611013770}
+  - component: {fileID: 6095786418133391963}
   m_Layer: 5
   m_Name: Resources UI
   m_TagString: Untagged
@@ -710,9 +711,9 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6581098751875884857}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.83333313, y: 0.83333313, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3965418617165059413}
@@ -786,6 +787,34 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &6095786418133391963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6581098751875884857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ea967c04df1f6d40893268b0554bf83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryPanel: {fileID: 7987662954967199246}
+  activationKey: 99
+  holdDuration: 0.5
+  allMineralTypes:
+  - {fileID: 11400000, guid: afa0c6676f8e0bd40a8ed55614a5641b, type: 2}
+  - {fileID: 11400000, guid: a06f94d1a759a224e9783a641a89f609, type: 2}
+  - {fileID: 11400000, guid: d4faacb5762670b4ab25be6bfa77dc8b, type: 2}
+  - {fileID: 11400000, guid: 2e758906a31b1584d9b97a86467aff6c, type: 2}
+  - {fileID: 11400000, guid: d3ec77b4df1af434fb0964be299cb92b, type: 2}
+  mineralCountTexts:
+  - {fileID: 4160819217587502271}
+  - {fileID: 2674213288670814911}
+  - {fileID: 4052955607357306703}
+  - {fileID: 1421430522045360797}
+  - {fileID: 7177281381102844431}
+  target: {fileID: 0}
 --- !u!1 &6786520957814551548
 GameObject:
   m_ObjectHideFlags: 0
@@ -1219,7 +1248,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.36078432, g: 0.882353, b: 0.90196085, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1311,8 +1340,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.40784317, g: 0.4901961, b: 0.5294118, a: 1}
+  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Color: {r: 0.90196085, g: 0.627451, b: 0.3647059, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

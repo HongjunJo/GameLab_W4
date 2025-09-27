@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: "\uC0B0\uC18C\uD1B5 Lv 2"
   description: "\uC0B0\uC18C \uCD5C\uB300\uCE58\uAC00 \uD55C\uB2E8\uACC4 \uC0C1\uC2B9\uD55C\uB2E4."
-  type: 4
-  value: 0
+  type: 5
+  value: 50
   icon: {fileID: 0}
+  objectNameToEnable: Oxygen Lv 2
+  objectNameToDisable: Oxygen Lv 1
   costs:
   - mineral: {fileID: 11400000, guid: afa0c6676f8e0bd40a8ed55614a5641b, type: 2}
     amount: 1
@@ -26,3 +28,5 @@ MonoBehaviour:
     amount: 1
   - mineral: {fileID: 11400000, guid: 2e758906a31b1584d9b97a86467aff6c, type: 2}
     amount: 1
+  prerequisiteAbility: {fileID: 11400000, guid: bb23d62a6a6382b49a55ca0c6517a62e, type: 2}
+  isPurchased: 0

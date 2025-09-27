@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: "\uAC80 Lv 2"
   description: "\uAC80\uC758 \uC0B0\uC18C \uC18C\uBAA8\uB7C9\uC774 \uC904\uC5B4\uB4E0\uB2E4."
-  type: 3
-  value: 0
+  type: 8
+  value: 0.25
   icon: {fileID: 0}
+  objectNameToEnable: 
+  objectNameToDisable: 
   costs:
   - mineral: {fileID: 11400000, guid: afa0c6676f8e0bd40a8ed55614a5641b, type: 2}
     amount: 1
@@ -26,3 +28,5 @@ MonoBehaviour:
     amount: 1
   - mineral: {fileID: 11400000, guid: 2e758906a31b1584d9b97a86467aff6c, type: 2}
     amount: 1
+  prerequisiteAbility: {fileID: 11400000, guid: 7cd95851b0dd2be409506b05b667ebe2, type: 2}
+  isPurchased: 0

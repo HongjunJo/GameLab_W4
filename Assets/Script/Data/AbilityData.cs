@@ -8,10 +8,14 @@ using System.Collections.Generic;
 public enum AbilityType
 {
     None,
-    PlayerDoubleJumpOn, // 플레이어 더블 점프 증가
+    PlayerDoubleJumpOn, // 플레이어 더블 점프 활성화
     PlayerDashOn,  // 플레이어 대시 활성화
     AttackPowerIncrease, // 공격력 증가
-    O2Increase,          // 산소통 증가
+    O2Increase1,          // 산소통 증가 1
+    O2Increase2,          // 산소통 증가 2
+    O2Increase3,          // 산소통 증가 3
+    MaxSwordLengthIncrease, // 최대 검 길이 증가
+    ReduceAirConsumption,   // 공기 소모량 감소
     // ... 여기에 새로운 능력 종류를 추가할 수 있습니다.
 }
 
@@ -44,8 +48,16 @@ public class AbilityData : ScriptableObject
     public float value;      // 능력치에 적용할 값 (예: 속도 1.1배, 점프력 +2)
     public Sprite icon; // 상점 UI에 표시될 아이콘 (선택 사항)
 
+    [Header("오브젝트 활성화 (선택사항)")]
+    public string objectNameToEnable;   // 활성화할 게임 오브젝트의 이름
+    public string objectNameToDisable;  // 비활성화할 게임 오브젝트의 이름
+
     [Header("구매 비용")]
     public List<ResourceCost> costs; // 구매에 필요한 자원 목록
+
+    [Header("선행 조건 (선택사항)")]
+    [Tooltip("이 능력을 구매하기 위해 먼저 구매해야 하는 능력입니다.")]
+    public AbilityData prerequisiteAbility;
 
     [Header("상태 (런타임 전용)")]
     [HideInInspector] public bool isPurchased = false; // 구매 여부 (런타임 중에만 변경)
