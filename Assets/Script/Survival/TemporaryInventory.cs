@@ -106,6 +106,33 @@ public class TemporaryInventory : MonoBehaviour
         return new Dictionary<MineralData, (int, List<ResourceSource>)>(tempResources);
     }
 
+    /// <summary>
+    /// 임시 인벤토리에서 특정 자원을 지정된 양만큼 사용합니다.
+    /// </summary>
+    /// <param name="mineral">사용할 광물</param>
+    /// <param name="amountToUse">사용하려는 양</param>
+    /// <returns>실제로 사용된 양</returns>
+    public int UseResource(MineralData mineral, int amountToUse)
+    {
+        if (!tempResources.ContainsKey(mineral)) return 0;
+
+        var entry = tempResources[mineral];
+        int spentAmount = Mathf.Min(entry.amount, amountToUse);
+
+        entry.amount -= spentAmount;
+
+        if (entry.amount <= 0)
+        {
+            tempResources.Remove(mineral);
+        }
+        else
+        {
+            tempResources[mineral] = entry;
+        }
+
+        return spentAmount;
+    }
+
     private void UpdateDebugDisplay()
     {
         debugTempResources.Clear();

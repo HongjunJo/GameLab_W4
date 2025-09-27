@@ -306,7 +306,7 @@ public class InteractionPortal : MonoBehaviour
         // MovementLimiter를 통해 이동을 막습니다.
         if (MovementLimiter.Instance != null)
         {
-            MovementLimiter.Instance.SetCanMove(false);
+            MovementLimiter.Instance.SetInputEnabled(false);
             Debug.Log("포탈: MovementLimiter를 통해 이동 비활성화");
         }
         
@@ -388,7 +388,7 @@ public class InteractionPortal : MonoBehaviour
         }
         
         // InputManager의 TestAble 메서드 사용 (전역 입력 활성화)
-        MovementLimiter.Instance?.SetCanMove(true);
+        MovementLimiter.Instance?.SetInputEnabled(true);
         
         Debug.Log("=== 포탈: 플레이어 제어 완전 활성화 완료 (MovementLimiter) ===");
     }

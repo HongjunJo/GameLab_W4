@@ -230,7 +230,7 @@ public class DangerGaugeSystem : MonoBehaviour
 
         if (MovementLimiter.Instance != null)
         {
-            MovementLimiter.Instance.SetCanMove(false);
+            MovementLimiter.Instance.SetInputEnabled(false);
         }
 
         StartCoroutine(DeathSequence());
@@ -333,7 +333,7 @@ public class DangerGaugeSystem : MonoBehaviour
         // MovementLimiter를 통해 움직임 제한 해제
         if (MovementLimiter.Instance != null)
         {
-            MovementLimiter.Instance.SetCanMove(true);
+            MovementLimiter.Instance.SetInputEnabled(true);
             Debug.Log("MovementLimiter를 통해 플레이어 제어 복구됨");
         }
     }
