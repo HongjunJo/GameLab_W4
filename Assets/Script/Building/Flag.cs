@@ -255,46 +255,46 @@ public class Flag : MonoBehaviour, IInteractable
         gizmoMinimumY = minY;
     }
     
-    private void OnDrawGizmosSelected()
-    {
-        // 안전지대 범위 표시 (Box 형태)
-        Gizmos.color = isActive ? Color.green : Color.red;
+    // private void OnDrawGizmosSelected()
+    // {
+    //     // 안전지대 범위 표시 (Box 형태)
+    //     Gizmos.color = isActive ? Color.green : Color.red;
         
-        Vector3 center = transform.position;
+    //     Vector3 center = transform.position;
         
-        if (limitGizmoToTopHalf)
-        {
-            // 설정된 최저 Y값 이상으로만 표시
-            float halfWidth = safeZoneSize.x * 0.5f;
-            float halfHeight = safeZoneSize.y * 0.5f;
+    //     if (limitGizmoToTopHalf)
+    //     {
+    //         // 설정된 최저 Y값 이상으로만 표시
+    //         float halfWidth = safeZoneSize.x * 0.5f;
+    //         float halfHeight = safeZoneSize.y * 0.5f;
             
-            float safeZoneBottom = center.y - halfHeight;
-            float safeZoneTop = center.y + halfHeight;
+    //         float safeZoneBottom = center.y - halfHeight;
+    //         float safeZoneTop = center.y + halfHeight;
             
-            // 실제 표시할 범위 계산
-            float displayBottom = Mathf.Max(safeZoneBottom, gizmoMinimumY);
-            float displayTop = safeZoneTop;
+    //         // 실제 표시할 범위 계산
+    //         float displayBottom = Mathf.Max(safeZoneBottom, gizmoMinimumY);
+    //         float displayTop = safeZoneTop;
             
-            Vector3 displayCenter = new Vector3(center.x, (displayBottom + displayTop) * 0.5f, center.z);
-            Vector3 displaySize = new Vector3(safeZoneSize.x, displayTop - displayBottom, 0);
+    //         Vector3 displayCenter = new Vector3(center.x, (displayBottom + displayTop) * 0.5f, center.z);
+    //         Vector3 displaySize = new Vector3(safeZoneSize.x, displayTop - displayBottom, 0);
             
-            // 와이어프레임 박스 (제한된 범위만)
-            Gizmos.DrawWireCube(displayCenter, displaySize);
-        }
-        else
-        {
-            // 전체 사각형 표시
-            Vector3 size = new Vector3(safeZoneSize.x, safeZoneSize.y, 0);
+    //         // 와이어프레임 박스 (제한된 범위만)
+    //         Gizmos.DrawWireCube(displayCenter, displaySize);
+    //     }
+    //     else
+    //     {
+    //         // 전체 사각형 표시
+    //         Vector3 size = new Vector3(safeZoneSize.x, safeZoneSize.y, 0);
             
-            // 와이어프레임 박스
-            Gizmos.DrawWireCube(center, size);
-        }
+    //         // 와이어프레임 박스
+    //         Gizmos.DrawWireCube(center, size);
+    //     }
         
-        // 다음 깃발로의 연결선 표시
-        if (nextFlag != null)
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(transform.position, nextFlag.transform.position);
-        }
-    }
+    //     // 다음 깃발로의 연결선 표시
+    //     if (nextFlag != null)
+    //     {
+    //         Gizmos.color = Color.blue;
+    //         Gizmos.DrawLine(transform.position, nextFlag.transform.position);
+    //     }
+    // }
 }

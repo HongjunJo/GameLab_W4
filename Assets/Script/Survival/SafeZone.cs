@@ -1,4 +1,4 @@
-using UnityEngine;
+  using UnityEngine;
 using System.Collections.Generic;
 
 /// <summary>
@@ -61,17 +61,21 @@ public class SafeZone : MonoBehaviour
             col = gameObject.AddComponent<BoxCollider2D>();
         }
         col.isTrigger = true;
-        
+
         // BoxCollider2D의 경우 크기 설정
         if (col is BoxCollider2D boxCol)
         {
             boxCol.size = safeZoneSize;
+            boxCol.offset = new Vector2(0,safeZoneSize.y/2 - 0.4f);
         }
         
         // 런타임 시각화 설정
         SetupRuntimeVisual();
     }
-    
+    void Start()
+    {
+        SetSize(safeZoneSize);
+    }
     private void SetupRuntimeVisual()
     {
         if (!showRuntimeVisual) return;
@@ -134,10 +138,10 @@ public class SafeZone : MonoBehaviour
             
             positions = new Vector3[4]
             {
-                new Vector3(-halfWidth, displayBottom, 0), // 왼쪽 아래 (제한된)
-                new Vector3(halfWidth, displayBottom, 0),  // 오른쪽 아래 (제한된)
-                new Vector3(halfWidth, displayTop, 0),     // 오른쪽 위
-                new Vector3(-halfWidth, displayTop, 0)     // 왼쪽 위
+                new Vector3(-halfWidth, displayBottom + safeZoneSize.y/2-0.4f, 0), // 왼쪽 아래 (제한된)
+                new Vector3(halfWidth, displayBottom+ safeZoneSize.y/2-0.4f, 0),  // 오른쪽 아래 (제한된)
+                new Vector3(halfWidth, displayTop+ safeZoneSize.y/2-0.4f, 0),     // 오른쪽 위
+                new Vector3(-halfWidth, displayTop+ safeZoneSize.y/2-0.4f, 0)     // 왼쪽 위
             };
         }
         else
@@ -484,13 +488,13 @@ public class SafeZone : MonoBehaviour
             Vector3 displaySize = new Vector3(safeZoneSize.x, displayTop - displayBottom, 0);
             
             // 와이어프레임 큐브 (제한된 범위만)
-            Gizmos.DrawWireCube(displayCenter, displaySize);
+            Gizmos.DrawWireCube(displayCenter+ new Vector3(0, safeZoneSize.y/2-0.4f,0), displaySize);
             
             // 활성화 상태에 따라 색상 변경하여 채우기
             Color fillColor = safeZoneColor;
             fillColor.a = isActive ? 0.2f : 0.1f;
             Gizmos.color = fillColor;
-            Gizmos.DrawCube(displayCenter, displaySize);
+            Gizmos.DrawCube(displayCenter+ new Vector3(0, safeZoneSize.y/2-0.4f,0), displaySize);
         }
         else
         {
@@ -498,13 +502,13 @@ public class SafeZone : MonoBehaviour
             Vector3 size = new Vector3(safeZoneSize.x, safeZoneSize.y, 0);
             
             // 와이어프레임 큐브
-            Gizmos.DrawWireCube(center, size);
+            Gizmos.DrawWireCube(center + new Vector3(0, safeZoneSize.y/2-0.4f,0), size);
             
             // 활성화 상태에 따라 색상 변경하여 채우기
             Color fillColor = safeZoneColor;
             fillColor.a = isActive ? 0.2f : 0.1f;
             Gizmos.color = fillColor;
-            Gizmos.DrawCube(center, size);
+            Gizmos.DrawWireCube(center + new Vector3(0, safeZoneSize.y/2-0.4f,0), size);
         }
     }
 }
