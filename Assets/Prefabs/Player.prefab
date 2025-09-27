@@ -219,6 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f30e559ee733b648befdcd877f7894d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
 --- !u!1 &5835938600362472412
 GameObject:
   m_ObjectHideFlags: 0
@@ -5310,7 +5311,6 @@ GameObject:
   - component: {fileID: 5434832300585529333}
   - component: {fileID: 5271742012902098856}
   - component: {fileID: 5721520154117652}
-  - component: {fileID: 7248304343156422288}
   - component: {fileID: 5241616017578277677}
   - component: {fileID: 4107973628831511206}
   - component: {fileID: 4117193436025723293}
@@ -5363,10 +5363,10 @@ CapsuleCollider2D:
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
-    m_Bits: 3319
+    m_Bits: 247
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 3319
+    m_Bits: 247
   m_ContactCaptureLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -5510,6 +5510,7 @@ MonoBehaviour:
   gravMultiplier: 1
   canJumpAgain: 0
   onGround: 0
+  canDoubleJump: 0
 --- !u!114 &1085630739978324822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5646,6 +5647,7 @@ MonoBehaviour:
     m_Bits: 1280
   Sword: {fileID: 3504475946562845421}
   Slash: {fileID: 4390661914341095927}
+  currentSwordLength: 1
   slashCoolTime: 0.15
   RequireAir: 0.3
   reduceAir: 0.1
@@ -5654,18 +5656,6 @@ MonoBehaviour:
   maxSwordLength: 10
   sizeOffset: 0.1
   spriteRenderer: {fileID: 5559514469256320218}
---- !u!114 &7248304343156422288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9048801839704934725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 246ecf1e91480ad428e4add589267464, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5241616017578277677
 MonoBehaviour:
   m_ObjectHideFlags: 0

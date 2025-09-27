@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: "\uAC80 Lv 1"
   description: "\uAD11\uBB3C\uC774 \uB354 \uBE68\uB9AC \uC798\uB77C\uC9C4\uB2E4."
+  type: 3
+  value: 0
   icon: {fileID: 0}
   costs:
   - mineral: {fileID: 11400000, guid: afa0c6676f8e0bd40a8ed55614a5641b, type: 2}
