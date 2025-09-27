@@ -2,9 +2,13 @@ using System.Collections;
 using System.ComponentModel;
 using UnityEngine;
 
-[RequireComponent(typeof(CapsuleCollider2D))]
+[
+    RequireComponent(typeof(CapsuleCollider2D))
+]
 public class Slice : MonoBehaviour
 {
+    [Header("Enemy Death Settings")]
+    [SerializeField] private bool destroyOnDeath = false; // true면 적이 죽을 때 오브젝트 삭제
     [SerializeField] Transform target;
     [SerializeField] GameObject[] TargetBodies;
     [SerializeField] private float bodyRemainTime = 1f;
@@ -60,8 +64,6 @@ public class Slice : MonoBehaviour
     
     public void SliceStart()
     {
-        if (GetComponent<EnemyBase>() != null && currentHp == 1)
-        return;
         if (currentHp - 1 <= 0)
         {
             StartCoroutine(nameof(RespawnCoroutine));
@@ -79,20 +81,25 @@ public class Slice : MonoBehaviour
     }
     private IEnumerator DelBody(GameObject _body)
     {
-        if (GetComponent<EnemyBase>() != null && currentHp == 2)
-        {
-            GetComponent<Rigidbody2D>().simulated = false;
-        }
+        // if (GetComponent<EnemyBase>() != null && currentHp == 2)
+        // {
+        //     GetComponent<Rigidbody2D>().simulated = false;
+        // }
         yield return new WaitForSeconds(bodyRemainTime);
         _body.SetActive(false);
-        if (GetComponent<EnemyBase>() != null && currentHp == 1)
-        {
-            TargetBodies[currentHp - 1].SetActive(false);
-        }
+        // if (GetComponent<EnemyBase>() != null && currentHp == 1)
+        // {
+        //     TargetBodies[currentHp - 1].SetActive(false);
+        // }
             
     }
     private IEnumerator RespawnCoroutine()
     {
+        if (GetComponent<EnemyBase>() != null && destroyOnDeath)
+        {
+            Destroy(gameObject);
+            yield break;
+        }
         if (respawnTime > 0f)
         {
             if (GetComponent<Ore>() != null)

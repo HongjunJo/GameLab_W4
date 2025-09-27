@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c752720a0a456b4f9eff4cbf5411b94, type: 3}
-  m_Name: Double Jump
+  m_Name: Sword 1
   m_EditorClassIdentifier: 
-  abilityName: "\uB354\uBE14 \uC810\uD504"
-  description: "\uB354\uBE14 \uC810\uD504\uAC00 \uAC00\uB2A5\uD574\uC9C4\uB2E4."
+  abilityName: "\uAC80 Lv 1"
+  description: "\uAD11\uBB3C\uC774 \uB354 \uBE68\uB9AC \uC798\uB77C\uC9C4\uB2E4."
+  type: 3
+  value: 0
   icon: {fileID: 0}
   costs:
   - mineral: {fileID: 11400000, guid: afa0c6676f8e0bd40a8ed55614a5641b, type: 2}

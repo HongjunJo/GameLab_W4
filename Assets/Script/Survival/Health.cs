@@ -10,6 +10,9 @@ public class Health : MonoBehaviour
     [SerializeField] private Color blinkColor = Color.red;
     [SerializeField] private int blinkCount = 6;
     [SerializeField] private float knockbackForce = 10f;
+    [Header("Invincible Sprite Renderers")]
+    [Tooltip("Change color for these SpriteRenderers during invincibility. If empty, uses first found child.")]
+    [SerializeField] private SpriteRenderer[] invincibleSpriteRenderers;
     private SpriteRenderer spriteRenderer;
     private Coroutine blinkCoroutine;
     [Header("HP Settings")]
@@ -38,7 +41,8 @@ public class Health : MonoBehaviour
 
     private void Awake()
     {
-    spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+    if (invincibleSpriteRenderers == null || invincibleSpriteRenderers.Length == 0)
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         // 플레이어의 DangerGaugeSystem 컴포넌트를 찾아 저장합니다.
         dangerGaugeSystem = GetComponent<DangerGaugeSystem>();
     }
@@ -108,7 +112,25 @@ public class Health : MonoBehaviour
     private System.Collections.IEnumerator BlinkAndInvincibleCoroutine()
     {
         isInvincible = true;
-        if (spriteRenderer != null)
+        if (invincibleSpriteRenderers != null && invincibleSpriteRenderers.Length > 0)
+        {
+            Color[] originalColors = new Color[invincibleSpriteRenderers.Length];
+            for (int j = 0; j < invincibleSpriteRenderers.Length; j++)
+                if (invincibleSpriteRenderers[j] != null)
+                    originalColors[j] = invincibleSpriteRenderers[j].color;
+            for (int i = 0; i < blinkCount; i++)
+            {
+                for (int j = 0; j < invincibleSpriteRenderers.Length; j++)
+                    if (invincibleSpriteRenderers[j] != null)
+                        invincibleSpriteRenderers[j].color = blinkColor;
+                yield return new WaitForSeconds(invincibleTime / (blinkCount * 2f));
+                for (int j = 0; j < invincibleSpriteRenderers.Length; j++)
+                    if (invincibleSpriteRenderers[j] != null)
+                        invincibleSpriteRenderers[j].color = originalColors[j];
+                yield return new WaitForSeconds(invincibleTime / (blinkCount * 2f));
+            }
+        }
+        else if (spriteRenderer != null)
         {
             Color originalColor = spriteRenderer.color;
             for (int i = 0; i < blinkCount; i++)

@@ -8,8 +8,10 @@ using System.Collections.Generic;
 public enum AbilityType
 {
     None,
-    PlayerSpeedIncrease, // 플레이어 이동 속도 증가
-    JumpHeightIncrease,  // 점프 높이 증가
+    PlayerDoubleJumpOn, // 플레이어 더블 점프 증가
+    PlayerDashOn,  // 플레이어 대시 활성화
+    AttackPowerIncrease, // 공격력 증가
+    O2Increase,          // 산소통 증가
     // ... 여기에 새로운 능력 종류를 추가할 수 있습니다.
 }
 
@@ -44,4 +46,8 @@ public class AbilityData : ScriptableObject
 
     [Header("구매 비용")]
     public List<ResourceCost> costs; // 구매에 필요한 자원 목록
+
+    [Header("상태 (런타임 전용)")]
+    [HideInInspector] public bool isPurchased = false; // 구매 여부 (런타임 중에만 변경)
+
 }

@@ -23,15 +23,13 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private bool showGizmos = true;
 
     [Header("Spawn Control")]
-    [SerializeField] private bool spawnOn = true;
+    [SerializeField] private bool spawning = false; // 인스펙터에서 on/off
 
     private float spawnTimer = 0f;
     private float spawnTimeElapsed = 0f;
-    private bool spawning = false;
     private int currentEnemyCount = 0;
     private List<GameObject> spawnedEnemies = new List<GameObject>();
     private bool allOreMined = false;
-
     // 외부에서 호출: 플레이어가 광석을 때릴 때
     public void StartSpawning()
     {
@@ -51,7 +49,6 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        if (!spawnOn) return;
         if (!spawning || allOreMined) return;
 
         if (useSpawnDuration)
