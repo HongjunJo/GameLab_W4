@@ -8,10 +8,14 @@ using System.Collections.Generic;
 public enum AbilityType
 {
     None,
-    PlayerDoubleJumpOn, // 플레이어 더블 점프 증가
+    PlayerDoubleJumpOn, // 플레이어 더블 점프 활성화
     PlayerDashOn,  // 플레이어 대시 활성화
     AttackPowerIncrease, // 공격력 증가
-    O2Increase,          // 산소통 증가
+    O2Increase1,          // 산소통 증가 1
+    O2Increase2,          // 산소통 증가 2
+    O2Increase3,          // 산소통 증가 3
+    MaxSwordLengthIncrease, // 최대 검 길이 증가
+    ReduceAirConsumption,   // 공기 소모량 감소
     // ... 여기에 새로운 능력 종류를 추가할 수 있습니다.
 }
 

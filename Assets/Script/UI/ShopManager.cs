@@ -26,6 +26,12 @@ public class ShopManager : MonoBehaviour
     private int selectedButtonIndex = -1; // 키보드 네비게이션을 위한 현재 선택된 버튼 인덱스
     private int confirmedSelectionIndex = -1; // Enter로 확정된 선택 인덱스
 
+    // 능력 적용을 위한 플레이어 컴포넌트 참조
+    private CharacterJump playerJump;
+    private CharacterDash playerDash;
+    private CharacterSlash playerSlash;
+    private DangerGaugeSystem playerDangerGauge;
+
     private TemporaryInventory playerTemporaryInventory;
     private Color defaultButtonColor = Color.white; // 버튼 기본 색상
     private Color selectedButtonColor = new Color(0.8f, 0.9f, 1f); // 선택된 버튼 하이라이트 색상
@@ -93,6 +99,12 @@ public class ShopManager : MonoBehaviour
         if (playerObject != null)
         {
             playerTemporaryInventory = playerObject.GetComponent<TemporaryInventory>();
+            // 플레이어의 능력 관련 컴포넌트들을 가져옵니다.
+            playerJump = playerObject.GetComponent<CharacterJump>();
+            playerDash = playerObject.GetComponent<CharacterDash>();
+            playerSlash = playerObject.GetComponent<CharacterSlash>();
+            playerDangerGauge = playerObject.GetComponent<DangerGaugeSystem>();
+
         }
         if (playerTemporaryInventory == null) {
             Debug.LogError("ShopManager: Player의 TemporaryInventory를 찾을 수 없습니다!");
@@ -127,34 +139,52 @@ public class ShopManager : MonoBehaviour
                 // 현재 첫 번째 줄에 있다면 (인덱스 0-3)
                 if (selectedButtonIndex < row1Count)
                 {
-                    // 목표 위치인 두 번째 줄에 활성화된 버튼이 있는지 확인합니다.
-                    bool secondRowHasInteractable = false;
-                    for (int i = row1Count; i < row1Count + row2Count; i++)
-                    {
-                        if (abilityButtons[i].interactable)
-                        {
-                            secondRowHasInteractable = true;
-                            break;
-                        }
-                    }
+                    // 1. 바로 아래에 있는 버튼을 우선적인 목표로 설정합니다.
+                    int directTargetIndex = selectedButtonIndex + row1Count;
 
-                    if (secondRowHasInteractable)
+                    // 2. 목표 버튼이 존재하고 활성화 상태인지 확인합니다.
+                    if (directTargetIndex < abilityButtons.Count && abilityButtons[directTargetIndex].interactable)
                     {
-                        // 두 번째 줄에 활성화된 버튼이 있으면, 아래로 이동
-                        int targetIndex = Mathf.Min(selectedButtonIndex + row1Count, row1Count + row2Count - 1);
-                        SelectButton(targetIndex);
+                        // 3. 활성화 상태라면, 목표했던 바로 그 버튼으로 이동합니다.
+                        SelectButton(directTargetIndex);
                     }
                     else
                     {
-                        // 두 번째 줄이 모두 비활성화 상태이면, 바로 구매 버튼으로 이동
-                        SelectPurchaseButton();
+                        // 4. 목표 버튼이 비활성화 상태이거나 존재하지 않는다면,
+                        //    그때서야 두 번째 줄에서 가장 가까운 활성화 버튼을 찾습니다.
+                        int firstAvailableInRow2 = -1;
+                        for (int i = row1Count; i < row1Count + row2Count; i++)
+                        {
+                            if (i < abilityButtons.Count && abilityButtons[i].interactable)
+                            {
+                                firstAvailableInRow2 = i;
+                                break; // 찾았으면 바로 중단
+                            }
+                        }
+
+                        if (firstAvailableInRow2 != -1)
+                        {
+                            // 찾은 대체 버튼으로 이동합니다.
+                            SelectButton(firstAvailableInRow2);
+                        }
+                        else
+                        {
+                            // [수정] 두 번째 줄도 비어있다면, 구매 버튼이 활성화 상태일 때만 이동합니다.
+                            if (purchaseButton.interactable)
+                            {
+                                SelectPurchaseButton();
+                            }
+                        }
                     }
                 }
                 // 현재 두 번째 줄에 있다면 (인덱스 4-6)
                 else
                 {
-                    // 두 번째 줄에서는 아래로 누르면 무조건 구매 버튼으로 이동합니다.
-                    SelectPurchaseButton();
+                    // [수정] 두 번째 줄에서는, 구매 버튼이 활성화 상태일 때만 아래로 이동합니다.
+                    if (purchaseButton.interactable)
+                    {
+                        SelectPurchaseButton();
+                    }
                 }
             }
             else if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -171,14 +201,11 @@ public class ShopManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 // 구매 버튼으로 이동하기 직전에 선택했던 능력 버튼으로 돌아갑니다.
-                // confirmedSelectionIndex가 유효하면 그곳으로, 아니면 두 번째 줄 중앙 버튼으로 갑니다.
                 int returnIndex = (confirmedSelectionIndex != -1) ? confirmedSelectionIndex : row1Count + 1;
                 SelectButton(returnIndex);
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                // 구매 버튼에서 아래 방향키를 누르면 아무 동작도 하지 않도록 막습니다.
-                // 이렇게 하면 인덱스 6번으로 이동하는 버그가 해결됩니다.
                 return;
             }
         }
@@ -188,7 +215,6 @@ public class ShopManager : MonoBehaviour
         {
             if (selectedButtonIndex == abilityButtons.Count) // 구매 버튼이 선택된 경우
             {
-                // 구매 버튼의 onClick 이벤트를 직접 호출
                 if (purchaseButton.interactable)
                 {
                     purchaseButton.onClick.Invoke();
@@ -196,10 +222,8 @@ public class ShopManager : MonoBehaviour
             }
             else if (selectedButtonIndex >= 0 && selectedButtonIndex < abilityButtons.Count)
             {
-                // Enter를 누르면 현재 하이라이트된 버튼을 "선택 확정" 상태로 만듭니다.
                 SelectAbility(selectedButtonIndex);
                 confirmedSelectionIndex = selectedButtonIndex;
-                // 시각적 피드백을 위해 버튼 색상 업데이트
                 UpdateButtonSelectionColors();
             }
         }
@@ -209,14 +233,24 @@ public class ShopManager : MonoBehaviour
     {
         if (abilityButtons.Count == 0) return;
 
+        // [수정] 첫 번째 루프인지 확인하기 위한 플래그
+        bool isFirstLoop = true; 
         int newIndex = index;
         int startIndex = newIndex;
+        
+        // 방향키 입력에 따른 탐색 방향 결정
         bool isMovingRight = index > selectedButtonIndex || (index == 0 && selectedButtonIndex == abilityButtons.Count - 1);
+        // 위/아래 이동 시에는 현재 위치보다 인덱스가 크면 오른쪽, 작으면 왼쪽으로 탐색하도록 보정
+        if (Mathf.Abs(index - selectedButtonIndex) > 1) 
+        {
+            isMovingRight = index > selectedButtonIndex;
+        }
+
 
         // 비활성화된 버튼을 건너뛰는 로직
         while (true)
         {
-            // 인덱스 범위 조정
+            // 인덱스 범위 조정 (배열의 양 끝을 순환하도록)
             if (newIndex < 0) newIndex = abilityButtons.Count - 1;
             if (newIndex >= abilityButtons.Count) newIndex = 0;
 
@@ -229,11 +263,14 @@ public class ShopManager : MonoBehaviour
                 return;
             }
 
-            // 모든 버튼을 순회했는데 활성화된 버튼이 없으면 종료
-            if (newIndex == startIndex && !abilityButtons[newIndex].interactable) return;
+            // [수정] 모든 버튼을 순회했는데 활성화된 버튼이 없으면 종료 (단, 첫 번째 루프는 제외)
+            if (!isFirstLoop && newIndex == startIndex) return;
 
             // 다음 버튼으로 이동
             newIndex += isMovingRight ? 1 : -1;
+            
+            // [수정] 첫 번째 루프가 끝났음을 표시
+            isFirstLoop = false; 
         }
     }
 
@@ -439,8 +476,8 @@ public class ShopManager : MonoBehaviour
                 SetButtonPurchased(abilityButtons[confirmedSelectionIndex]);
             }
 
-            // TODO: 플레이어에게 능력 적용하는 로직 호출
-            // 예: player.AddAbility(currentlySelectedAbility);
+            // 플레이어에게 능력 적용 로직 호출
+            ApplyAbility(currentlySelectedAbility);
 
             // 구매 후, 선택 정보는 유지하되 구매 버튼만 비활성화합니다.
             UpdatePurchaseButtonState();
@@ -452,6 +489,78 @@ public class ShopManager : MonoBehaviour
         {
             Debug.Log("자원이 부족하여 구매할 수 없습니다.");
             // 여기에 "자원 부족" 알림 UI를 띄우면 더 좋습니다.
+        }
+    }
+
+    /// <summary>
+    /// 구매한 능력의 종류에 따라 플레이어에게 실제 효과를 적용합니다.
+    /// </summary>
+    /// <param name="ability">구매한 능력 데이터</param>
+    private void ApplyAbility(AbilityData ability)
+    {
+        if (ability == null) return;
+
+        switch (ability.type)
+        {
+            case AbilityType.PlayerDoubleJumpOn:
+                if (playerJump != null)
+                {
+                    playerJump.canDoubleJump = true;
+                    Debug.Log("플레이어 더블 점프 능력이 활성화되었습니다.");
+                }
+                else Debug.LogWarning("CharacterJump 컴포넌트를 찾을 수 없습니다.");
+                break;
+
+            case AbilityType.PlayerDashOn:
+                if (playerDash != null)
+                {
+                    playerDash.canDash = true;
+                    Debug.Log("플레이어 대시 능력이 활성화되었습니다.");
+                }
+                else Debug.LogWarning("CharacterDash 컴포넌트를 찾을 수 없습니다.");
+                break;
+
+            case AbilityType.AttackPowerIncrease:
+                // CharacterSlash에 attackPower 변수가 없으므로 주석 처리합니다. 필요 시 추가해주세요.
+                // if (playerSlash != null)
+                // {
+                //     playerSlash.attackPower += ability.value;
+                //     Debug.Log($"공격력이 {ability.value}만큼 증가했습니다.");
+                // }
+                // else Debug.LogWarning("CharacterSlash 컴포넌트를 찾을 수 없습니다.");
+                break;
+
+            case AbilityType.O2Increase1:
+            case AbilityType.O2Increase2:
+            case AbilityType.O2Increase3:
+                if (playerDangerGauge != null)
+                {
+                    playerDangerGauge.IncreaseMaxOxygen(ability.value);
+                }
+                else Debug.LogWarning("DangerGaugeSystem 컴포넌트를 찾을 수 없습니다.");
+                break;
+
+            case AbilityType.MaxSwordLengthIncrease:
+                if (playerSlash != null)
+                {
+                    playerSlash.maxSwordLength += ability.value;
+                    Debug.Log($"최대 검 길이가 {ability.value}만큼 증가했습니다. 현재: {playerSlash.maxSwordLength}");
+                }
+                else Debug.LogWarning("CharacterSlash 컴포넌트를 찾을 수 없습니다.");
+                break;
+
+            case AbilityType.ReduceAirConsumption:
+                if (playerSlash != null)
+                {
+                    playerSlash.reduceAir = Mathf.Max(0, playerSlash.reduceAir - ability.value);
+                    Debug.Log($"검 유지 시 공기 소모량이 {ability.value}만큼 감소했습니다. 현재: {playerSlash.reduceAir}");
+                }
+                else Debug.LogWarning("CharacterSlash 컴포넌트를 찾을 수 없습니다.");
+                break;
+
+            default:
+                Debug.LogWarning($"처리되지 않은 능력 타입입니다: {ability.type}");
+                break;
         }
     }
 

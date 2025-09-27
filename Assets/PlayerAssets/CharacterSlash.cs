@@ -14,12 +14,12 @@ public class CharacterSlash : MonoBehaviour
 
     [Header("Air")]
     [SerializeField] private float RequireAir;
-    [SerializeField] private float reduceAir;
+    public float reduceAir; // 상점에서 접근할 수 있도록 public으로 변경
     [SerializeField] private float slashReduceAir;
     [SerializeField] private bool SlashUseAirMode = false;
 
     [Header("Sword Length")]
-    [SerializeField] private float maxSwordLength;
+    public float maxSwordLength; // 상점에서 접근할 수 있도록 public으로 변경
     [SerializeField] private float sizeOffset;
 
     private bool isSlash = false;

@@ -565,4 +565,17 @@ public class DangerGaugeSystem : MonoBehaviour
     {
         return DisplayDanger/maxOxygen;
     }
+
+    /// <summary>
+    /// 최대 산소량을 증가시킵니다. 상점에서 호출됩니다.
+    /// </summary>
+    /// <param name="amount">증가시킬 양</param>
+    public void IncreaseMaxOxygen(float amount)
+    {
+        if (amount <= 0) return;
+        maxOxygen += amount;
+        currentOxygen += amount; // 최대치 증가 시 현재 산소도 같이 채워줌
+        GameEvents.DangerChanged(DisplayDanger, maxOxygen); // UI 업데이트
+        Debug.Log($"최대 산소량이 {amount}만큼 증가했습니다. 현재 최대 산소량: {maxOxygen}");
+    }
 }
