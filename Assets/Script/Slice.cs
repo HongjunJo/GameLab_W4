@@ -104,8 +104,7 @@ public class Slice : MonoBehaviour
         {
             if (GetComponent<Ore>() != null)
                 GetComponent<Ore>().DropOre();
-            if (GetComponent<OxygenStone>() != null)
-                GetComponent<OxygenStone>().ActiveSafeZone();
+
             DelTarget();
             yield return new WaitForSeconds(respawnTime);
             ResetTarget();
@@ -113,6 +112,8 @@ public class Slice : MonoBehaviour
         else
         {
             DelTarget();
+            if (GetComponent<OxygenStone>() != null)
+                GetComponent<OxygenStone>().ActiveSafeZone();
         }
     }
 }
