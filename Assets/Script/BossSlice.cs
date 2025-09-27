@@ -5,7 +5,7 @@ using UnityEngine;
 [
     RequireComponent(typeof(CapsuleCollider2D))
 ]
-public class Slice : MonoBehaviour
+public class BoossSlice : MonoBehaviour
 {
     [Header("Enemy Death Settings")]
     [SerializeField] private bool destroyOnDeath = false; // true면 적이 죽을 때 오브젝트 삭제
@@ -104,6 +104,7 @@ public class Slice : MonoBehaviour
         {
             if (GetComponent<Ore>() != null)
                 GetComponent<Ore>().DropOre();
+
             DelTarget();
             yield return new WaitForSeconds(respawnTime);
             ResetTarget();
@@ -113,8 +114,6 @@ public class Slice : MonoBehaviour
             DelTarget();
             if (GetComponent<OxygenStone>() != null)
                 GetComponent<OxygenStone>().ActiveSafeZone();
-            if (GetComponent<Ore>() != null)
-                GetComponent<Ore>().DropOre();    
         }
     }
 }
