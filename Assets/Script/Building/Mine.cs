@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// 광산 - 특정 광물을 주기적으로 생산하는 건물
@@ -17,6 +18,8 @@ public class Mine : MonoBehaviour, IInteractable
     
     // Public 속성들
     public bool IsBuilt => isBuilt;
+
+    private TemporaryInventory _playerTemporaryInventory;
     
     private void Awake()
     {
@@ -37,6 +40,17 @@ public class Mine : MonoBehaviour, IInteractable
             col = gameObject.AddComponent<BoxCollider2D>();
             col.isTrigger = true;
         }
+
+        // 플레이어의 임시 인벤토리 참조를 가져옵니다.
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+        {
+            _playerTemporaryInventory = playerObject.GetComponent<TemporaryInventory>();
+        }
+        if (_playerTemporaryInventory == null)
+        {
+            Debug.LogError("Mine: Player의 TemporaryInventory를 찾을 수 없습니다!");
+        }
     }
     
     public void StopInteract()
@@ -47,7 +61,7 @@ public class Mine : MonoBehaviour, IInteractable
     public bool CanInteract()
     {
         // 건설되지 않았고, 건설 비용이 충분할 때만 상호작용 가능
-        return !isBuilt && activationRecipe != null && activationRecipe.CanAfford();
+        return !isBuilt && activationRecipe != null && CanAffordWithTemporaryInventory(activationRecipe.resourceCosts);
     }
     
     public void Interact()
@@ -81,10 +95,10 @@ public class Mine : MonoBehaviour, IInteractable
     /// </summary>
     private void BuildMine()
     {
-        if (activationRecipe == null || !activationRecipe.CanAfford()) return;
+        if (activationRecipe == null || !CanAffordWithTemporaryInventory(activationRecipe.resourceCosts)) return;
         
         // 비용 소모
-        if (activationRecipe.ConsumeCost())
+        if (TrySpendCombinedResources(activationRecipe.resourceCosts))
         {
             isBuilt = true;
             
@@ -123,5 +137,58 @@ public class Mine : MonoBehaviour, IInteractable
     {
         isBuilt = true;
         UpdateVisual();
+    }
+
+    /// <summary>
+    /// 창고와 임시 인벤토리를 모두 확인하여 건설 가능한지 확인합니다.
+    /// </summary>
+    private bool CanAffordWithTemporaryInventory(List<ResourceCost> costs)
+    {
+        if (ResourceManager.Instance == null || _playerTemporaryInventory == null) return false;
+
+        var tempResources = _playerTemporaryInventory.GetAllTempResources();
+
+        foreach (var cost in costs)
+        {
+            int mainAmount = ResourceManager.Instance.GetResourceAmount(cost.mineral);
+            int tempAmount = 0;
+            if (tempResources.TryGetValue(cost.mineral, out var entry))
+            {
+                tempAmount = entry.amount;
+            }
+
+            if (mainAmount + tempAmount < cost.amount)
+            {
+                return false; // 하나라도 부족하면 즉시 false 반환
+            }
+        }
+        return true; // 모든 자원이 충분하면 true 반환
+    }
+
+    /// <summary>
+    /// 임시 인벤토리와 창고에서 자원을 순차적으로 소모합니다.
+    /// </summary>
+    private bool TrySpendCombinedResources(List<ResourceCost> costs)
+    {
+        if (!CanAffordWithTemporaryInventory(costs)) return false;
+
+        foreach (var cost in costs)
+        {
+            int remainingCost = cost.amount;
+
+            // 1. 임시 인벤토리에서 먼저 차감
+            if (_playerTemporaryInventory != null)
+            {
+                int tempSpent = _playerTemporaryInventory.UseResource(cost.mineral, remainingCost);
+                remainingCost -= tempSpent;
+            }
+
+            // 2. 남은 비용이 있다면 창고에서 차감
+            if (remainingCost > 0)
+            {
+                ResourceManager.Instance.UseResource(cost.mineral, remainingCost);
+            }
+        }
+        return true;
     }
 }
