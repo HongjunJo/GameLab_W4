@@ -130,6 +130,13 @@ public class Slice : MonoBehaviour
                 GetComponent<OxygenStone>().ActiveSafeZone();
             if (GetComponent<Ore>() != null)
                 GetComponent<Ore>().DropOre();    
+            if (GetComponent<Ore>() != null)
+            {
+                if (GetComponent<Ore>().oreList == OreList.Astronium)
+                {
+                    enemySpawner.StopSpawning();
+                }
+            }
             yield break;
         }
     }

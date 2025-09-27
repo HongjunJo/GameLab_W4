@@ -1202,6 +1202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DropObject: {fileID: 4250622247416391985, guid: 6989599bb2a9f684f9166c740a02874e, type: 3}
+  oreList: 0
 --- !u!114 &51233817511474435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1214,10 +1215,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69d004e79aa6c554ca127991914c068a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemySpawner: {fileID: 0}
   destroyOnDeath: 0
   target: {fileID: 3219040331955997926}
   TargetBodies: []
   bodyRemainTime: 1
-  respawnTime: 1
+  respawnTime: 25
   maxHp: 0
   currentHp: 0

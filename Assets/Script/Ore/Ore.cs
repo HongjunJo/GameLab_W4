@@ -9,5 +9,6 @@ public class Ore : MonoBehaviour
     public void DropOre()
     {
         Instantiate(DropObject, transform.position, Quaternion.identity);
+        Debug.Log("DropOre");
     }
 }
