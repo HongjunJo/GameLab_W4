@@ -453,6 +453,13 @@ MonoBehaviour:
   mapMaxBounds: {x: 500, y: 500}
   lastMoveDirection: 1
   showBounds: 1
+  isRader: 0
+  stage1Pos: {x: 0, y: 0, z: 0}
+  stage1Size: 0
+  stage2Pos: {x: 0, y: 0, z: 0}
+  stage2Size: 0
+  currentStage: 0
+  raderSpeed: 0
 --- !u!114 &327962550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2425,6 +2432,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7080732618610765282, guid: 440db151b1720224c922868dfb558942, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7080732618610765282, guid: 440db151b1720224c922868dfb558942, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8404171805122257175, guid: 440db151b1720224c922868dfb558942, type: 3}
       propertyPath: m_Name
       value: Chest
