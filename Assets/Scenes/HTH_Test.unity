@@ -3730,7 +3730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 7726479488852129378, guid: ca3fb8de3ab8f0e498d481fc3ed0d676, type: 3}
+  - {fileID: 7726479488852129378, guid: 4e41583c7a544274b9934de73a82b91a, type: 3}
   spawnPositions:
   - {x: -62, y: 149, z: 0}
   - {x: -65.6, y: 149, z: 0}
@@ -6461,28 +6461,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1465932365256340097, guid: 0f0f3bebaa8b8c64ab9d6ad1e9788903, type: 3}
   m_PrefabInstance: {fileID: 1118961915}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &890878276 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7085316938866935584, guid: 78309e6e99ba5a548bc5f1c973a9de39, type: 3}
-  m_PrefabInstance: {fileID: 1447676803}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &890878295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 890878276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9596fe2faac6b9d41a9cfba2b2a441b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dashDistance: 5
-  dashDuration: 0.2
-  dashCooldown: 1
-  dashKey: 304
-  canDash: 1
 --- !u!4 &909242694 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9216472979902807846, guid: e6d01dbb482fa01438ae37fd9a8937c3, type: 3}
@@ -8586,11 +8564,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!212 &1165844512 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 6062763358585127375, guid: 78309e6e99ba5a548bc5f1c973a9de39, type: 3}
-  m_PrefabInstance: {fileID: 1447676803}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1175671985 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9216472979902807846, guid: e6d01dbb482fa01438ae37fd9a8937c3, type: 3}
@@ -11042,17 +11015,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 486373062463077423, guid: 78309e6e99ba5a548bc5f1c973a9de39, type: 3}
-      propertyPath: oxygenIncreaseRate
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 1500319370858825540, guid: 78309e6e99ba5a548bc5f1c973a9de39, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -94.3
+      value: 8.2
       objectReference: {fileID: 0}
     - target: {fileID: 1500319370858825540, guid: 78309e6e99ba5a548bc5f1c973a9de39, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -25.2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1500319370858825540, guid: 78309e6e99ba5a548bc5f1c973a9de39, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11086,22 +11055,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3204283863225897875, guid: 78309e6e99ba5a548bc5f1c973a9de39, type: 3}
-      propertyPath: canDoubleJump
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7085316938866935584, guid: 78309e6e99ba5a548bc5f1c973a9de39, type: 3}
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
-    - target: {fileID: 7340256722677764074, guid: 78309e6e99ba5a548bc5f1c973a9de39, type: 3}
-      propertyPath: invincibleSpriteRenderers.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7340256722677764074, guid: 78309e6e99ba5a548bc5f1c973a9de39, type: 3}
-      propertyPath: 'invincibleSpriteRenderers.Array.data[0]'
-      value: 
-      objectReference: {fileID: 1165844512}
     - target: {fileID: 8062538264733932638, guid: 78309e6e99ba5a548bc5f1c973a9de39, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -11109,10 +11066,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7085316938866935584, guid: 78309e6e99ba5a548bc5f1c973a9de39, type: 3}
-      insertIndex: 5
-      addedObject: {fileID: 890878295}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78309e6e99ba5a548bc5f1c973a9de39, type: 3}
 --- !u!1 &1447981938
 GameObject:
@@ -12884,6 +12838,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6230276881640048297, guid: 27c94029ed5d75241a4089ad9c458ee0, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8242493635968826606, guid: 27c94029ed5d75241a4089ad9c458ee0, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8598953505364301372, guid: 27c94029ed5d75241a4089ad9c458ee0, type: 3}

@@ -375,13 +375,13 @@ GameObject:
   - component: {fileID: 6310143751456435363}
   - component: {fileID: 6930884680330871504}
   - component: {fileID: 3618197215101926942}
+  - component: {fileID: 5565508690600143474}
   - component: {fileID: 3204283863225897875}
   - component: {fileID: 1213500214583510323}
   - component: {fileID: 5635285415633138273}
   - component: {fileID: 6404198281808836625}
   - component: {fileID: 7061296204443947856}
   - component: {fileID: 486373062463077423}
-  - component: {fileID: 8726644267922721608}
   - component: {fileID: 6298993242794654602}
   - component: {fileID: 6101163966279672208}
   - component: {fileID: 1455848958883984929}
@@ -526,6 +526,23 @@ MonoBehaviour:
   landSqueezing: 0
   playerGrounded: 0
   cameraFalling: 0
+--- !u!114 &5565508690600143474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7085316938866935584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9596fe2faac6b9d41a9cfba2b2a441b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashDistance: 5
+  dashDuration: 0.2
+  dashCooldown: 1
+  dashKey: 304
+  canDash: 1
 --- !u!114 &3204283863225897875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,7 +571,7 @@ MonoBehaviour:
   gravMultiplier: 1
   canJumpAgain: 0
   onGround: 0
-  canDoubleJump: 0
+  canDoubleJump: 1
 --- !u!114 &1213500214583510323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -663,20 +680,6 @@ MonoBehaviour:
   isDead: 0
   isRespawning: 0
   isInSafeZone: 0
---- !u!114 &8726644267922721608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7085316938866935584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8748a46ee59271e459834f1cce1a13ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugTempResources: []
-  deathBoxPrefab: {fileID: 2904965324482465628, guid: d6eaf5687054366478bbd73c425fc2e3, type: 3}
 --- !u!114 &6298993242794654602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -811,6 +814,8 @@ MonoBehaviour:
   blinkColor: {r: 1, g: 0, b: 0, a: 1}
   blinkCount: 6
   knockbackForce: 10
+  invincibleSpriteRenderers:
+  - {fileID: 6062763358585127375}
   maxHP: 100
   currentHP: 100
   isInvincible: 0
