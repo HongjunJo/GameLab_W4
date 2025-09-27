@@ -6,21 +6,21 @@ using System.Collections;
 /// </summary>
 public class SimpleTeleporter : MonoBehaviour
 {
-    [Header("텔레포트 설정")]
+    [Header("Teleport Settings")]
     [SerializeField] private Transform teleportTarget; // 이동할 위치
     [SerializeField] private KeyCode teleportKey = KeyCode.W; // 텔레포트 키
     [SerializeField] private float interactionRange = 3f; // 상호작용 범위
     [SerializeField] private Vector2 positionOffset = new Vector2(0f, -2f); // 위치 오프셋 (X, Y)
     
-    [Header("페이드 효과")]
+    [Header("Fade Effect")]
     [SerializeField] private float fadeTime = 0.5f; // 페이드 시간
     [SerializeField] private Color fadeColor = Color.black; // 페이드 색상
     
-    [Header("비용 (선택사항)")]
+    [Header("Cost (Optional)")]
     [SerializeField] private MineralData requiredMineral; // 필요한 광물
     [SerializeField] private int requiredAmount = 0; // 필요한 수량
     
-    [Header("조건 확인 (선택사항)")]
+    [Header("Condition Check (Optional)")]
     [SerializeField] private Mine requiredMine; // 활성화되어야 하는 광산
     [SerializeField] private bool checkMineActive = true; // 광산 활성화 상태 확인 여부
     

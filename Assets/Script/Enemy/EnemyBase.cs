@@ -7,6 +7,10 @@ using System.Collections.Generic;
 [RequireComponent(typeof(Health))]
 public class EnemyBase : MonoBehaviour
 {
+    public enum AutoPatrolStartDir { Left, Right, Random }
+    [Header("Auto Patrol Settings")]
+    [SerializeField] private AutoPatrolStartDir autoPatrolStartDir = AutoPatrolStartDir.Left;
+    private int autoPatrolDir = 1; // 1: 오른쪽, -1: 왼쪽
     // unreachablePlayerTimeLimit은 chaseMemoryTime과 항상 동일하게 사용
     private float unreachablePlayerTimer = 0f;
     [Header("Cliff Check")]
@@ -60,6 +64,19 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void Awake()
     {
+        // 자동 패트롤 시작 방향 설정
+        switch (autoPatrolStartDir)
+        {
+            case AutoPatrolStartDir.Left:
+                autoPatrolDir = -1;
+                break;
+            case AutoPatrolStartDir.Right:
+                autoPatrolDir = 1;
+                break;
+            case AutoPatrolStartDir.Random:
+                autoPatrolDir = Random.value < 0.5f ? -1 : 1;
+                break;
+        }
         health = GetComponent<Health>();
         if (health != null)
         {
@@ -84,9 +101,16 @@ public class EnemyBase : MonoBehaviour
         else
         {
             playerTarget = null;
-            if (enablePatrol && patrolPoints.Count > 1)
+            if (enablePatrol)
             {
-                Patrol();
+                if (patrolPoints.Count > 1)
+                {
+                    Patrol();
+                }
+                else
+                {
+                    AutoPatrolToWall();
+                }
             }
         }
     }
@@ -114,6 +138,31 @@ public class EnemyBase : MonoBehaviour
         else
         {
             patrolWaitTimer = 0f;
+        }
+    }
+
+    // 패트롤 포인트가 없을 때 자동으로 좌우 벽 끝까지 이동
+    private void AutoPatrolToWall()
+    {
+        float step = moveSpeed * Time.deltaTime;
+        Vector3 moveDir = Vector3.right * autoPatrolDir;
+        if (IsGroundAhead(moveDir))
+        {
+            // 벽 체크 (Raycast로 앞에 groundLayer가 있는지 확인)
+            CapsuleCollider2D col = GetComponent<CapsuleCollider2D>();
+            Vector2 origin = col != null ? new Vector2(col.bounds.center.x, col.bounds.center.y) : (Vector2)transform.position;
+            float checkDist = 0.5f;
+            RaycastHit2D wallHit = Physics2D.Raycast(origin, moveDir, checkDist, groundLayer);
+            if (wallHit.collider != null)
+            {
+                autoPatrolDir *= -1; // 방향 반전
+                return;
+            }
+            transform.position += moveDir * step;
+        }
+        else
+        {
+            autoPatrolDir *= -1; // 절벽이면 방향 반전
         }
     }
     private void DetectPlayer()
