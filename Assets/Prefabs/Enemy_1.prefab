@@ -365,7 +365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoPatrolStartDir: 1
   preventCliffFall: 1
-  groundCheckDistance: 0.2
+  groundCheckDistance: 0.5
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -374,7 +374,7 @@ MonoBehaviour:
   patrolWaitTime: 0.2
   chaseMemoryTime: 1
   followY: 0
-  detectionRadius: 2.5
+  detectionRadius: 20
   playerLayer:
     serializedVersion: 2
     m_Bits: 1

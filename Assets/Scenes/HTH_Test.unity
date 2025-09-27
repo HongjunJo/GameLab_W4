@@ -452,6 +452,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: OxygenStone (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 8374349087050569633, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: safeZoneSize.x
+      value: 3.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374349087050569633, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: safeZoneSize.y
+      value: 5.36
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2230,6 +2238,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainFlag (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3941159722931236747, guid: 21d4ac88ae289604b84bf07b26ce6d52, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2862,6 +2874,75 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9127541503230993065, guid: 858a9fa12589e3a4f82b95261c9b9c36, type: 3}
   m_PrefabInstance: {fileID: 1884163260}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &374729985
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2324476297812233360, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2324476297812233360, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 108.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2324476297812233360, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2324476297812233360, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2324476297812233360, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2324476297812233360, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2324476297812233360, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2324476297812233360, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2324476297812233360, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2324476297812233360, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3597364171172691302, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: isActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846400301580623914, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: m_Name
+      value: OxygenStone (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374349087050569633, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: safeZoneSize.x
+      value: 14.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374349087050569633, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: safeZoneSize.y
+      value: 7.93
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
 --- !u!1001 &378800083
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3987,8 +4068,8 @@ MonoBehaviour:
   - {x: -62, y: 149, z: 0}
   - {x: -65.6, y: 149, z: 0}
   - {x: -69.4, y: 149, z: 0}
-  maxEnemyCount: 10
-  spawnInterval: 1
+  maxEnemyCount: 15
+  spawnInterval: 0
   spawnDuration: 20
   useSpawnDuration: 0
   spawnPointRandom: 1
@@ -4237,6 +4318,14 @@ PrefabInstance:
     - target: {fileID: 3846400301580623914, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
       propertyPath: m_Name
       value: OxygenStone
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374349087050569633, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: safeZoneSize.x
+      value: 5.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374349087050569633, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: safeZoneSize.y
+      value: 5.02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4998,7 +5087,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -5023,7 +5112,7 @@ Transform:
   m_GameObject: {fileID: 638233245}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -71.9, y: 142.2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6224,6 +6313,75 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9127541503230993065, guid: 858a9fa12589e3a4f82b95261c9b9c36, type: 3}
   m_PrefabInstance: {fileID: 1500714609}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &769820580
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2324476297812233360, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2324476297812233360, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2324476297812233360, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2324476297812233360, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2324476297812233360, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2324476297812233360, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2324476297812233360, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2324476297812233360, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2324476297812233360, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2324476297812233360, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3597364171172691302, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: isActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846400301580623914, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: m_Name
+      value: OxygenStone
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374349087050569633, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: safeZoneSize.x
+      value: 16.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374349087050569633, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: safeZoneSize.y
+      value: 7.83
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
 --- !u!4 &795311588 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1465932365256340097, guid: 0f0f3bebaa8b8c64ab9d6ad1e9788903, type: 3}
@@ -6435,6 +6593,14 @@ PrefabInstance:
     - target: {fileID: 3846400301580623914, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
       propertyPath: m_Name
       value: OxygenStone (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374349087050569633, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: safeZoneSize.x
+      value: 5.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374349087050569633, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: safeZoneSize.y
+      value: 3.72
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6774,6 +6940,14 @@ PrefabInstance:
     - target: {fileID: 3846400301580623914, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
       propertyPath: m_Name
       value: OxygenStone (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374349087050569633, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: safeZoneSize.x
+      value: 6.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374349087050569633, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: safeZoneSize.y
+      value: 5.89
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7388,6 +7562,14 @@ PrefabInstance:
     - target: {fileID: 3846400301580623914, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
       propertyPath: m_Name
       value: OxygenStone (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374349087050569633, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: safeZoneSize.x
+      value: 6.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374349087050569633, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: safeZoneSize.y
+      value: 7.73
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8155,8 +8337,8 @@ Transform:
   m_GameObject: {fileID: 1016584959}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -75.31332, y: -14.466431, z: 0}
-  m_LocalScale: {x: 7.2840586, y: 26.480198, z: 1}
+  m_LocalPosition: {x: -79.18299, y: -14.466431, z: 0}
+  m_LocalScale: {x: 15.023371, y: 26.480198, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5737962715976173517}
@@ -9568,8 +9750,8 @@ MonoBehaviour:
   - {x: -98, y: -12, z: 0}
   - {x: -102.1, y: -12, z: 0}
   - {x: -107.1, y: -12, z: 0}
-  maxEnemyCount: 10
-  spawnInterval: 1
+  maxEnemyCount: 15
+  spawnInterval: 0
   spawnDuration: 20
   useSpawnDuration: 0
   spawnPointRandom: 1
@@ -11291,6 +11473,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: OxygenStone
       objectReference: {fileID: 0}
+    - target: {fileID: 8374349087050569633, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: safeZoneSize.x
+      value: 6.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374349087050569633, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: safeZoneSize.y
+      value: 5.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11693,13 +11883,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 486373062463077423, guid: 78309e6e99ba5a548bc5f1c973a9de39, type: 3}
+      propertyPath: oxygenDepleteDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 486373062463077423, guid: 78309e6e99ba5a548bc5f1c973a9de39, type: 3}
+      propertyPath: oxygenDepleteInterval
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 1500319370858825540, guid: 78309e6e99ba5a548bc5f1c973a9de39, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.2
+      value: -93
       objectReference: {fileID: 0}
     - target: {fileID: 1500319370858825540, guid: 78309e6e99ba5a548bc5f1c973a9de39, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.3
+      value: -24.2
       objectReference: {fileID: 0}
     - target: {fileID: 1500319370858825540, guid: 78309e6e99ba5a548bc5f1c973a9de39, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11733,9 +11931,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1888952084878621069, guid: 78309e6e99ba5a548bc5f1c973a9de39, type: 3}
+      propertyPath: slashCoolTime
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 7085316938866935584, guid: 78309e6e99ba5a548bc5f1c973a9de39, type: 3}
       propertyPath: m_Name
       value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7340256722677764074, guid: 78309e6e99ba5a548bc5f1c973a9de39, type: 3}
+      propertyPath: maxHP
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7340256722677764074, guid: 78309e6e99ba5a548bc5f1c973a9de39, type: 3}
+      propertyPath: currentHP
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8062538264733932638, guid: 78309e6e99ba5a548bc5f1c973a9de39, type: 3}
       propertyPath: m_AnchorMax.y
@@ -12274,6 +12484,71 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 203a4ae6ca772cf46a18e0e3625f5cc0, type: 3}
+--- !u!1001 &1533891736
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1836797291929572112, guid: e6d01dbb482fa01438ae37fd9a8937c3, type: 3}
+      propertyPath: m_Name
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196049487880120826, guid: e6d01dbb482fa01438ae37fd9a8937c3, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100808518135505324, guid: e6d01dbb482fa01438ae37fd9a8937c3, type: 3}
+      propertyPath: followY
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216472979902807846, guid: e6d01dbb482fa01438ae37fd9a8937c3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -39.438583
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216472979902807846, guid: e6d01dbb482fa01438ae37fd9a8937c3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 127.342155
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216472979902807846, guid: e6d01dbb482fa01438ae37fd9a8937c3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216472979902807846, guid: e6d01dbb482fa01438ae37fd9a8937c3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216472979902807846, guid: e6d01dbb482fa01438ae37fd9a8937c3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216472979902807846, guid: e6d01dbb482fa01438ae37fd9a8937c3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216472979902807846, guid: e6d01dbb482fa01438ae37fd9a8937c3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216472979902807846, guid: e6d01dbb482fa01438ae37fd9a8937c3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216472979902807846, guid: e6d01dbb482fa01438ae37fd9a8937c3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216472979902807846, guid: e6d01dbb482fa01438ae37fd9a8937c3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e6d01dbb482fa01438ae37fd9a8937c3, type: 3}
 --- !u!1 &1537973805
 GameObject:
   m_ObjectHideFlags: 0
@@ -14269,6 +14544,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: OxygenStone (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8374349087050569633, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: safeZoneSize.x
+      value: 2.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374349087050569633, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: safeZoneSize.y
+      value: 2.17
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15395,6 +15678,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: OxygenStone (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8374349087050569633, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: safeZoneSize.x
+      value: 6.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374349087050569633, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: safeZoneSize.y
+      value: 4.53
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15754,6 +16045,14 @@ PrefabInstance:
     - target: {fileID: 3846400301580623914, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
       propertyPath: m_Name
       value: OxygenStone (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374349087050569633, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: safeZoneSize.x
+      value: 3.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374349087050569633, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: safeZoneSize.y
+      value: 4.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16145,6 +16444,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chest
       objectReference: {fileID: 0}
+    - target: {fileID: 8404171805122257175, guid: 440db151b1720224c922868dfb558942, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8584167948327856401, guid: 440db151b1720224c922868dfb558942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.903824
@@ -16417,6 +16720,10 @@ PrefabInstance:
     - target: {fileID: 3941159722931236747, guid: 21d4ac88ae289604b84bf07b26ce6d52, type: 3}
       propertyPath: m_Name
       value: MainFlag
+      objectReference: {fileID: 0}
+    - target: {fileID: 3941159722931236747, guid: 21d4ac88ae289604b84bf07b26ce6d52, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17138,6 +17445,14 @@ PrefabInstance:
     - target: {fileID: 3846400301580623914, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
       propertyPath: m_Name
       value: OxygenStone
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374349087050569633, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: safeZoneSize.x
+      value: 4.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8374349087050569633, guid: 076e57d295c2ce747a638441fea70f12, type: 3}
+      propertyPath: safeZoneSize.y
+      value: 5.44
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17927,7 +18242,7 @@ Transform:
   m_GameObject: {fileID: 2219007443608473592}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -54.81, y: -11.119999, z: 0}
+  m_LocalPosition: {x: -53.72, y: -11.119999, z: 0}
   m_LocalScale: {x: 6.2435875, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20701,7 +21016,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2203358130464625825, guid: f7131544711cbd84f9e35aa686b8b58a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -79.43
+      value: -87.31
       objectReference: {fileID: 0}
     - target: {fileID: 2203358130464625825, guid: f7131544711cbd84f9e35aa686b8b58a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -23610,6 +23925,8 @@ SceneRoots:
   - {fileID: 1089656476}
   - {fileID: 944544264}
   - {fileID: 1985694310}
+  - {fileID: 769820580}
+  - {fileID: 374729985}
   - {fileID: 253139452}
   - {fileID: 638233250}
   - {fileID: 1447676803}
@@ -23617,3 +23934,4 @@ SceneRoots:
   - {fileID: 1648553797}
   - {fileID: 5347814224992240483}
   - {fileID: 53690475}
+  - {fileID: 1533891736}
