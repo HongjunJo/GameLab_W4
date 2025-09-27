@@ -7,6 +7,7 @@ using UnityEngine;
 ]
 public class Slice : MonoBehaviour
 {
+    [SerializeField] EnemySpawner enemySpawner;
     [Header("Enemy Death Settings")]
     [SerializeField] private bool destroyOnDeath = false; // true면 적이 죽을 때 오브젝트 삭제
     [SerializeField] Transform target;
@@ -19,6 +20,9 @@ public class Slice : MonoBehaviour
     private Quaternion SavedRotaion;
     private Vector3[] SavedBodyPos;
     private Quaternion[] SavedBodyRotaion;
+    
+
+    private bool isFirst = true;
     void Start()
     {
         maxHp = target.childCount;
@@ -64,6 +68,17 @@ public class Slice : MonoBehaviour
     
     public void SliceStart()
     {
+        if (GetComponent<Ore>() != null)
+        {
+            if (isFirst && GetComponent<Ore>().oreList == OreList.Astronium)
+            {
+                enemySpawner.StartSpawning();
+                isFirst = false;
+            }
+        }
+        
+        
+        
         if (currentHp - 1 <= 0)
         {
             StartCoroutine(nameof(RespawnCoroutine));

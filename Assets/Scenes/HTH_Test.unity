@@ -9003,7 +9003,7 @@ MonoBehaviour:
   spawnPointRandom: 1
   enemyTypeRandom: 1
   showGizmos: 1
-  spawning: 1
+  spawning: 0
 --- !u!4 &1218719565
 Transform:
   m_ObjectHideFlags: 0
@@ -9013,7 +9013,7 @@ Transform:
   m_GameObject: {fileID: 1218719563}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -90.5, y: -24.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19700,6 +19700,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4096984899838923, guid: f7131544711cbd84f9e35aa686b8b58a, type: 3}
+      propertyPath: oreList
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4096984899838923, guid: f7131544711cbd84f9e35aa686b8b58a, type: 3}
       propertyPath: DropObject
       value: 
       objectReference: {fileID: 4250622247416391985, guid: c195f1e3a7e1f824d845d8f18c822717, type: 3}
@@ -19811,6 +19815,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 3590759439498537564, guid: f7131544711cbd84f9e35aa686b8b58a, type: 3}
+      propertyPath: enemySpawner
+      value: 
+      objectReference: {fileID: 1218719564}
     - target: {fileID: 3590759439498537564, guid: f7131544711cbd84f9e35aa686b8b58a, type: 3}
       propertyPath: bodyRemainTime
       value: 2

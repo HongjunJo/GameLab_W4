@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7375690852652832725}
   - component: {fileID: 8096261248667623199}
   - component: {fileID: 2046201180891937419}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Astronium4_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,10 +136,10 @@ PolygonCollider2D:
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ContactCaptureLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 1896098627076348352}
   - component: {fileID: 2859606795353194115}
   - component: {fileID: 8406494251464486129}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Astronium6_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,10 +337,10 @@ PolygonCollider2D:
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ContactCaptureLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -386,7 +386,7 @@ GameObject:
   - component: {fileID: 3942475779832769257}
   - component: {fileID: 3277680836598890384}
   - component: {fileID: 6550662114881822516}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Astronium7_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -510,10 +510,10 @@ PolygonCollider2D:
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ContactCaptureLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -559,7 +559,7 @@ GameObject:
   - component: {fileID: 7475064235219166704}
   - component: {fileID: 807917494753817036}
   - component: {fileID: 8979045017480832361}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Astronium1_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -763,7 +763,7 @@ GameObject:
   - component: {fileID: 6572402509176184999}
   - component: {fileID: 6439446200422928119}
   - component: {fileID: 73805841388770158}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Astronium8_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -887,10 +887,10 @@ PolygonCollider2D:
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ContactCaptureLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -955,7 +955,7 @@ GameObject:
   - component: {fileID: 3740100768671083600}
   - component: {fileID: 6048248424455220320}
   - component: {fileID: 1451369947415553386}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Astronium5_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1079,10 +1079,10 @@ PolygonCollider2D:
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ContactCaptureLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1265,8 +1265,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 2.68}
-  m_Size: {x: 3.75, y: 11.51}
+  m_Offset: {x: 0, y: 1.5}
+  m_Size: {x: 3.75, y: 8.2}
   m_Direction: 0
 --- !u!114 &4096984899838923
 MonoBehaviour:
@@ -1281,6 +1281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DropObject: {fileID: 4250622247416391985, guid: c195f1e3a7e1f824d845d8f18c822717, type: 3}
+  oreList: 4
 --- !u!114 &3590759439498537564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1293,10 +1294,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69d004e79aa6c554ca127991914c068a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemySpawner: {fileID: 0}
   destroyOnDeath: 0
   target: {fileID: 1553349528661975501}
-  TargetBodies: []
-  bodyRemainTime: 1
+  TargetBodies:
+  - {fileID: 4250622247416391985, guid: c195f1e3a7e1f824d845d8f18c822717, type: 3}
+  bodyRemainTime: 2
   respawnTime: 0
   maxHp: 0
   currentHp: 0
@@ -1312,7 +1315,7 @@ GameObject:
   - component: {fileID: 8745578689952606355}
   - component: {fileID: 4263453702287126569}
   - component: {fileID: 118023874112222639}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Astronium9_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1436,10 +1439,10 @@ PolygonCollider2D:
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ContactCaptureLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1485,7 +1488,7 @@ GameObject:
   - component: {fileID: 8543061754261486656}
   - component: {fileID: 7549670005570887067}
   - component: {fileID: 7390153979678162102}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Astronium2_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1694,7 +1697,7 @@ GameObject:
   - component: {fileID: 790958127919487458}
   - component: {fileID: 874408665970935702}
   - component: {fileID: 2154644781875153733}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Astronium3_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1818,10 +1821,10 @@ PolygonCollider2D:
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ContactCaptureLayers:
     serializedVersion: 2
     m_Bits: 4294967295
