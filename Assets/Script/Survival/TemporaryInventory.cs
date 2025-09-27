@@ -23,6 +23,12 @@ public class TemporaryInventory : MonoBehaviour
     [Header("Debug - Temporary Resources")]
     [SerializeField] private List<TempResourceDisplay> debugTempResources = new List<TempResourceDisplay>();
 
+    [Header("획득 UI 설정")]
+    [Tooltip("자원 획득 시 생성할 UI 프리팹 (AcquiredResourceItem 스크립트 포함)")]
+    [SerializeField] private GameObject acquiredResourceUIPrefab;
+    [Tooltip("획득 UI가 생성될 부모 Canvas의 Transform")]
+    [SerializeField] private Transform acquiredUIParent;
+
     [Header("사망 설정")]
     [SerializeField] private GameObject deathBoxPrefab; // 사망 시 생성될 아이템 상자 프리팹
 
@@ -48,6 +54,9 @@ public class TemporaryInventory : MonoBehaviour
 
         Debug.Log($"[임시] {mineral.name} {amount}개 추가. 현재 임시 보유량: {tempResources[mineral].amount}");
         UpdateDebugDisplay();
+
+        // ▼▼▼▼▼ 요청하신 기능 추가 부분 ▼▼▼▼▼
+        ShowAcquiredResourceUI(mineral, amount);
 
         // 임시 인벤토리 변경 사항을 UI에 알립니다.
         OnTemporaryResourceChanged?.Invoke(new Dictionary<MineralData, (int, List<ResourceSource>)>(tempResources));
@@ -139,6 +148,30 @@ public class TemporaryInventory : MonoBehaviour
         foreach (var kvp in tempResources)
         {
             debugTempResources.Add(new TempResourceDisplay { mineral = kvp.Key, amount = kvp.Value.amount });
+        }
+    }
+
+    /// <summary>
+    /// 획득한 자원을 보여주는 UI를 생성하고 설정합니다.
+    /// </summary>
+    private void ShowAcquiredResourceUI(MineralData mineral, int amount)
+    {
+        if (acquiredResourceUIPrefab == null || acquiredUIParent == null)
+        {
+            // Debug.LogWarning("자원 획득 UI 프리팹 또는 부모가 설정되지 않았습니다.");
+            return;
+        }
+
+        // UI 프리팹을 지정된 부모 아래에 생성
+        GameObject uiInstance = Instantiate(acquiredResourceUIPrefab, acquiredUIParent);
+
+        // AcquiredResourceItem 스크립트를 가져와서 데이터 설정
+        AcquiredResourceItem itemUI = uiInstance.GetComponent<AcquiredResourceItem>();
+        if (itemUI != null)
+        {
+            itemUI.SetItem(mineral, amount);
+            // 생성된 UI에게 플레이어를 타겟으로 설정해줍니다.
+            itemUI.SetTarget(transform);
         }
     }
 }
