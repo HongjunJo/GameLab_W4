@@ -17,6 +17,8 @@ MonoBehaviour:
   type: 6
   value: 50
   icon: {fileID: 0}
+  objectNameToEnable: Oxygen Lv 3
+  objectNameToDisable: Oxygen Lv 2
   costs:
   - mineral: {fileID: 11400000, guid: afa0c6676f8e0bd40a8ed55614a5641b, type: 2}
     amount: 1
@@ -26,4 +28,5 @@ MonoBehaviour:
     amount: 1
   - mineral: {fileID: 11400000, guid: 2e758906a31b1584d9b97a86467aff6c, type: 2}
     amount: 1
+  prerequisiteAbility: {fileID: 11400000, guid: df76ef924fa965a419f2af07b6377f81, type: 2}
   isPurchased: 0

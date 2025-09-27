@@ -17,6 +17,8 @@ MonoBehaviour:
   type: 8
   value: 0.25
   icon: {fileID: 0}
+  objectNameToEnable: 
+  objectNameToDisable: 
   costs:
   - mineral: {fileID: 11400000, guid: afa0c6676f8e0bd40a8ed55614a5641b, type: 2}
     amount: 1
@@ -26,4 +28,5 @@ MonoBehaviour:
     amount: 1
   - mineral: {fileID: 11400000, guid: 2e758906a31b1584d9b97a86467aff6c, type: 2}
     amount: 1
-  isPurchased: 1
+  prerequisiteAbility: {fileID: 11400000, guid: 7cd95851b0dd2be409506b05b667ebe2, type: 2}
+  isPurchased: 0

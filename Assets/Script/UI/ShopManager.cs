@@ -303,7 +303,18 @@ public class ShopManager : MonoBehaviour
 
         // --- UI 업데이트 ---
         abilityNameText.text = currentlySelectedAbility.abilityName;
-        abilityDescriptionText.text = currentlySelectedAbility.description;
+
+        // 선행 조건이 충족되지 않았을 경우, 설명에 안내 문구 추가
+        if (currentlySelectedAbility.prerequisiteAbility != null && !currentlySelectedAbility.prerequisiteAbility.isPurchased)
+        {
+            string prerequisiteName = currentlySelectedAbility.prerequisiteAbility.abilityName;
+            string postposition = KoreanPostpositionHelper.HasFinalConsonant(prerequisiteName) ? "을" : "를";
+            abilityDescriptionText.text = $"{currentlySelectedAbility.description}\n\n<color=red><b>[잠김]</b> ‘{prerequisiteName}’{postposition} 먼저 제작해야 합니다.</color>";
+        }
+        else
+        {
+            abilityDescriptionText.text = currentlySelectedAbility.description;
+        }
 
         // 아이콘 업데이트
         if (abilityIconImage != null)
@@ -400,11 +411,14 @@ public class ShopManager : MonoBehaviour
             return;
         }
 
+        // 선행 조건 확인
+        bool prerequisiteMet = currentlySelectedAbility.prerequisiteAbility == null || currentlySelectedAbility.prerequisiteAbility.isPurchased;
+
         // ResourceManager를 통해 자원이 충분한지 확인
         bool canAfford = CanAffordWithTemporaryInventory(currentlySelectedAbility.costs);
 
-        // 구매 가능하고, 아직 구매하지 않은 능력일 때만 버튼 활성화
-        purchaseButton.interactable = canAfford && !currentlySelectedAbility.isPurchased;
+        // 모든 조건(비용, 선행조건, 미구매)을 만족할 때만 버튼 활성화
+        purchaseButton.interactable = canAfford && prerequisiteMet && !currentlySelectedAbility.isPurchased;
     }
 
     /// <summary>
@@ -462,6 +476,13 @@ public class ShopManager : MonoBehaviour
     {
         if (currentlySelectedAbility == null || ResourceManager.Instance == null || playerTemporaryInventory == null) return;
 
+        // 선행 조건이 충족되었는지 다시 확인
+        if (currentlySelectedAbility.prerequisiteAbility != null && !currentlySelectedAbility.prerequisiteAbility.isPurchased)
+        {
+            Debug.LogWarning($"구매 시도 실패: '{currentlySelectedAbility.prerequisiteAbility.abilityName}' 선행 능력이 필요합니다.");
+            return;
+        }
+
         // 창고와 임시 인벤토리를 모두 사용하여 자원을 소모합니다.
         if (TrySpendCombinedResources(currentlySelectedAbility.costs))
         {
@@ -499,6 +520,43 @@ public class ShopManager : MonoBehaviour
     private void ApplyAbility(AbilityData ability)
     {
         if (ability == null) return;
+        
+        Debug.Log($"[ShopManager] '{ability.abilityName}' 능력 적용 시작.");
+ 
+        // 1. 게임 오브젝트 활성화/비활성화 처리
+        if (!string.IsNullOrEmpty(ability.objectNameToEnable))
+        {
+            Debug.Log($"[ShopManager] 활성화할 오브젝트 검색: '{ability.objectNameToEnable}'");
+            GameObject objToEnable = FindObjectInScene(ability.objectNameToEnable);
+ 
+            if (objToEnable != null)
+            {
+                objToEnable.SetActive(true);
+                Debug.Log($"[ShopManager] 성공: '{objToEnable.name}' 오브젝트를 활성화했습니다. (현재 상태: {objToEnable.activeSelf})");
+            }
+            else
+            {
+                Debug.LogWarning($"[ShopManager] 실패: '{ability.objectNameToEnable}' 이름을 가진 오브젝트를 씬에서 찾을 수 없습니다. 이름이나 존재 여부를 확인하세요.");
+            }
+        }
+ 
+        if (!string.IsNullOrEmpty(ability.objectNameToDisable))
+        {
+            Debug.Log($"[ShopManager] 비활성화할 오브젝트 검색: '{ability.objectNameToDisable}'");
+            // 비활성화할 오브젝트는 보통 이미 활성화 상태이므로 GameObject.Find()를 사용해도 괜찮습니다.
+            GameObject objToDisable = GameObject.Find(ability.objectNameToDisable);
+ 
+            if (objToDisable != null)
+            {
+                objToDisable.SetActive(false);
+                Debug.Log($"[ShopManager] 성공: '{objToDisable.name}' 오브젝트를 비활성화했습니다. (현재 상태: {objToDisable.activeSelf})");
+            }
+            else
+            {
+                // 만약 비활성화할 오브젝트도 못찾는 경우를 대비해 경고를 남깁니다.
+                Debug.LogWarning($"[ShopManager] 경고: '{ability.objectNameToDisable}' 이름을 가진 오브젝트를 씬에서 찾을 수 없습니다.");
+            }
+        }
 
         switch (ability.type)
         {
@@ -510,7 +568,6 @@ public class ShopManager : MonoBehaviour
                 }
                 else Debug.LogWarning("CharacterJump 컴포넌트를 찾을 수 없습니다.");
                 break;
-
             case AbilityType.PlayerDashOn:
                 if (playerDash != null)
                 {
@@ -519,7 +576,6 @@ public class ShopManager : MonoBehaviour
                 }
                 else Debug.LogWarning("CharacterDash 컴포넌트를 찾을 수 없습니다.");
                 break;
-
             case AbilityType.AttackPowerIncrease:
                 // CharacterSlash에 attackPower 변수가 없으므로 주석 처리합니다. 필요 시 추가해주세요.
                 // if (playerSlash != null)
@@ -529,7 +585,6 @@ public class ShopManager : MonoBehaviour
                 // }
                 // else Debug.LogWarning("CharacterSlash 컴포넌트를 찾을 수 없습니다.");
                 break;
-
             case AbilityType.O2Increase1:
             case AbilityType.O2Increase2:
             case AbilityType.O2Increase3:
@@ -539,7 +594,6 @@ public class ShopManager : MonoBehaviour
                 }
                 else Debug.LogWarning("DangerGaugeSystem 컴포넌트를 찾을 수 없습니다.");
                 break;
-
             case AbilityType.MaxSwordLengthIncrease:
                 if (playerSlash != null)
                 {
@@ -548,7 +602,6 @@ public class ShopManager : MonoBehaviour
                 }
                 else Debug.LogWarning("CharacterSlash 컴포넌트를 찾을 수 없습니다.");
                 break;
-
             case AbilityType.ReduceAirConsumption:
                 if (playerSlash != null)
                 {
@@ -557,7 +610,6 @@ public class ShopManager : MonoBehaviour
                 }
                 else Debug.LogWarning("CharacterSlash 컴포넌트를 찾을 수 없습니다.");
                 break;
-
             default:
                 Debug.LogWarning($"처리되지 않은 능력 타입입니다: {ability.type}");
                 break;
@@ -591,5 +643,24 @@ public class ShopManager : MonoBehaviour
     {
         button.interactable = false;
         button.GetComponent<Image>().color = Color.gray; // 시각적으로 비활성화 표시
+    }
+
+    /// <summary>
+    /// 씬에 있는 모든 게임 오브젝트(비활성화 포함) 중에서 이름으로 오브젝트를 찾습니다.
+    /// </summary>
+    /// <param name="name">찾을 오브젝트의 이름</param>
+    /// <returns>찾은 게임 오브젝트 또는 null</returns>
+    private GameObject FindObjectInScene(string name)
+    {
+        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+        foreach (GameObject go in allObjects)
+        {
+            // 씬에 있는 프리팹이 아닌, 실제 씬의 오브젝트만 대상으로 합니다.
+            if (go.hideFlags == HideFlags.None && go.name == name)
+            {
+                return go;
+            }
+        }
+        return null;
     }
 }
