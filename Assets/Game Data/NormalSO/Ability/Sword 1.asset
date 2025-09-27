@@ -15,8 +15,10 @@ MonoBehaviour:
   abilityName: "\uAC80 Lv 1"
   description: "\uAC80 \uCD5C\uB300 \uAE38\uC774\uAC00 \uB354 \uB298\uC5B4\uB09C\uB2E4."
   type: 7
-  value: 100
+  value: 6
   icon: {fileID: 0}
+  objectNameToEnable: 
+  objectNameToDisable: 
   costs:
   - mineral: {fileID: 11400000, guid: afa0c6676f8e0bd40a8ed55614a5641b, type: 2}
     amount: 1
@@ -26,4 +28,5 @@ MonoBehaviour:
     amount: 1
   - mineral: {fileID: 11400000, guid: 2e758906a31b1584d9b97a86467aff6c, type: 2}
     amount: 1
+  prerequisiteAbility: {fileID: 0}
   isPurchased: 0

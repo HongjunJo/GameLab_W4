@@ -65,36 +65,21 @@ public class CharacterMove : MonoBehaviour
     }
     void Start()
     {
-        // InputManager가 준비되었을 때만 이벤트 등록
-        if (InputManager.Instance != null)
-        {
-            InputManager.Instance.MovementAD += OnMovement;
-        }
+        // InputManager의 Update에서 직접 directionX를 설정하므로 이벤트 구독이 더 이상 필요하지 않습니다.
     }
     private void OnEnable()
     {
         // 컴포넌트가 활성화될 때 이벤트 다시 등록
         if (InputManager.Instance != null)
         {
-            InputManager.Instance.MovementAD += OnMovement;
+            // InputManager.Instance.MovementAD += OnMovement; // 제거
         }
     }
 
     private void OnDisable()
     {
         // 컴포넌트가 비활성화될 때 이벤트 해제
-        if (InputManager.Instance != null)
-        {
-            InputManager.Instance.MovementAD -= OnMovement;
-        }
-    }
-
-    public void OnMovement(float movement)
-    {
-        if (MovementLimiter.Instance.CharacterCanMove&&!isCleared&&!isDinoAttacked)
-        {
-            directionX = movement;
-        }
+        // 이벤트 해제 코드도 더 이상 필요하지 않습니다.
     }
     // Update is called once per frame
     void Update()
@@ -102,6 +87,12 @@ public class CharacterMove : MonoBehaviour
         if (!MovementLimiter.Instance.CharacterCanMove)
         {
             directionX = 0;
+        }
+        else if (MovementLimiter.Instance.CharacterCanMove && !isCleared && !isDinoAttacked && InputManager.Instance != null)
+        {
+            // [수정됨] InputManager에서 직접 값을 읽어와 directionX를 설정합니다.
+            // 이렇게 하면 이벤트 처리 없이도 안정적으로 입력 값을 가져올 수 있습니다.
+            directionX = InputManager.Instance.playerInput.Player.Move.ReadValue<Vector2>().x;
         }
 
         if (directionX != 0 && MovementLimiter.Instance.CharacterCanRotate)
